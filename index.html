@@ -204,6 +204,13 @@
     margin-right: 0.4em;
     opacity: 0.7;
   }
+  h3 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 1.25rem 0 0.4rem;
+  }
+  li > ul { margin: 0.1rem 0 0.2rem; }
   p { margin: 0.6rem 0; }
 
   /* ===== インフォボックス ===== */
@@ -276,6 +283,12 @@
     white-space: normal;
     color: var(--muted);
   }
+  .infobox td small.note {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
   .infobox .group th {
     text-align: center;
     background: var(--frost);
@@ -319,8 +332,7 @@
     background: var(--frost);
     text-align: center;
   }
-  .wikitable td.date { white-space: nowrap; width: 8.5rem; }
-  .wikitable td.src  { width: 4.5rem; text-align: center; }
+  .wikitable td.date { white-space: nowrap; width: 7.5rem; }
   .wikitable tbody tr:nth-child(even) td { background: var(--paper); }
 
   sup.ref { font-size: 0.75em; line-height: 0; }
@@ -353,6 +365,23 @@
   }
   footer p { margin: 0.3rem 0; }
 
+  /* 表はインフォボックスの横の残り幅に収める（入らなければ下に回る） */
+  .table-wrap {
+    overflow-x: auto;
+    min-width: min(100%, 26rem);
+  }
+  .table-wrap .wikitable { margin: 0.75rem 0; }
+
+  /* ===== タブレット ===== */
+  @media (max-width: 960px) {
+    .infobox {
+      float: none;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 1.25rem;
+    }
+  }
+
   /* ===== スマホ ===== */
   @media (max-width: 720px) {
     article { padding: 1rem 1rem 1.5rem; }
@@ -364,7 +393,6 @@
     .wikitable tr { border: 1px solid var(--line); margin-bottom: 0.5rem; }
     .wikitable td { border: none; padding: 0.2rem 0.65rem; text-align: left !important; }
     .wikitable td.date { font-weight: 700; color: var(--link); padding-top: 0.45rem; }
-    .wikitable td.src::before { content: "出典："; color: var(--muted); }
   }
 </style>
 </head>
@@ -423,11 +451,13 @@
     <tr><th>出身</th><td>北海道旭川市<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
     <tr><th>活動開始</th><td>2026年6月9日（初動画）<sup class="ref"><a href="#note-4">[4]</a></sup></td></tr>
     <tr><th>アカウント開設</th><td>YouTube：2026年4月9日<sup class="ref"><a href="#note-2">[2]</a></sup><br>X：2026年4月（初投稿は4月10日）<sup class="ref"><a href="#note-3">[3]</a></sup></td></tr>
-    <tr><th>初配信</th><td>2026年7月9日<sup class="ref"><a href="#note-12">[12]</a></sup></td></tr>
+    <tr><th>初配信</th><td>2026年7月9日<sup class="ref"><a href="#note-15">[15]</a></sup></td></tr>
     <tr><th>誕生日</th><td>7月9日</td></tr>
     <tr class="group"><th colspan="2">制作</th></tr>
     <tr><th>ママ兼パパ<small>（イラストレーター兼Live2Dモデラー）</small></th><td><a href="https://x.com/yukino_kureha">紅葉雪乃</a><sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
     <tr><th>配信背景・<br>コメント枠</th><td><a href="https://x.com/mgnghn_mmn">めがねごはん</a><sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr><th>動画背景</th><td><a href="https://www.sohokkai.co.jp/">株式会社総北海</a>（あさなみブランド）<sup class="ref"><a href="#note-1">[1]</a></sup><sup class="ref"><a href="#note-6">[6]</a></sup><small class="note">使用許諾のみで、独占使用権はない</small></td></tr>
+    <tr><th>ロゴ</th><td>作者不明<sup class="ref"><a href="#note-15">[15]</a></sup><small class="note">ココナラで制作を依頼</small></td></tr>
     <tr class="group"><th colspan="2">タグ</th></tr>
     <tr><th>総合</th><td>#九日なここ<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
     <tr><th>配信</th><td>#きょうは九日</td></tr>
@@ -440,15 +470,18 @@
 
   <p id="overview">
     <b>九日なここ</b>（ここのか なここ）は、北海道旭川市を拠点に活動する「旭川市非公式」のVTuber。
-    旭川市生まれを名乗り、旭川の話題を届けることを掲げている<sup class="ref" id="cite-1"><a href="#note-1">[1]</a></sup>。
+    旭川市生まれ、旭川のための情報発信を活動目的として掲げている<sup class="ref" id="cite-1"><a href="#note-1">[1]</a></sup>。
     2026年4月9日にYouTubeチャンネルを開設し<sup class="ref"><a href="#note-2">[2]</a></sup>、翌10日にXで初投稿した<sup class="ref"><a href="#note-3">[3]</a></sup>。6月9日からYouTubeで動画の投稿を始め<sup class="ref"><a href="#note-4">[4]</a></sup>、
-    同年7月9日に初配信を行った<sup class="ref"><a href="#note-12">[12]</a></sup>。
+    同年7月9日に初配信を行った<sup class="ref"><a href="#note-15">[15]</a></sup>。
   </p>
 
   <nav class="toc" aria-label="目次">
     <div class="toc-title">目次</div>
     <ol>
-      <li><a href="#person">人物</a></li>
+      <li><a href="#person">人物</a>
+        <ol><li><a href="#favorites">好きなもの</a></li></ol>
+      </li>
+      <li><a href="#channel">チャンネル特徴</a></li>
       <li><a href="#history">活動歴</a></li>
       <li><a href="#links">公式リンク</a></li>
       <li><a href="#notes">脚注</a></li>
@@ -457,115 +490,83 @@
 
   <h2 id="person">人物</h2>
   <ul>
-    <li>チャンネルの紹介文では、旭川の話題を届けて「みーんなまとめて市民にしちゃいます」と述べている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
-    <li>動画は不定期更新で、「9」のつく日に配信することがあるとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。初配信以降の配信は、いずれも9のつく日に行われている<sup class="ref"><a href="#note-12">[12]</a></sup><sup class="ref"><a href="#note-20">[20]</a></sup>。</li>
-    <li>告知はX（旧Twitter）の<a href="https://x.com/9thnakoko">@9thnakoko</a>で行うとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
     <li>一人称は「なここ」。</li>
+    <li>苗字の「九日」は、旭川の「旭」の字を「九」と「日」に分解したもの<sup class="ref"><a href="#note-15">[15]</a></sup>。名前の「なここ」は、誕生日の7月9日（「な」ながつ「ここ」のか）と語呂の良さから付けられた<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
+    <li>朝型<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
+    <li>ゲームはするが、画面酔いするため1時間続けて遊ぶことはできず、本人いわく下手だという。</li>
+  </ul>
+
+  <h3 id="favorites">好きなもの</h3>
+  <ul>
+    <li>食べること
+      <ul>
+        <li>旭川で毎年開かれる「北の恵み あさひかわ食べマルシェ」を楽しみにしている<sup class="ref"><a href="#note-17">[17]</a></sup><sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+        <li>甘いものが好きで、旭川市のナチュラルチーズ工房「<a href="https://www.japacheese.com/">ジャパチーズ</a>」のソフトクリームが好物<sup class="ref"><a href="#note-15">[15]</a></sup>。</li>
+        <li>豊富温泉の川島旅館（豊富町）が作る、味噌のフレーバーバターが好き<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+      </ul>
+    </li>
+    <li>お酒<sup class="ref"><a href="#note-8">[8]</a></sup>。</li>
+    <li>おしゃべり。4時間ひとりで話し続けて、温厚な祖父を怒らせたことがあるほど<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
+    <li>美術。特に歌川広重<sup class="ref"><a href="#note-18">[18]</a></sup>とフィンセント・ファン・ゴッホ<sup class="ref"><a href="#note-17">[17]</a></sup>。北海道立旭川美術館の特別展「大広重展―東海道五拾三次と雪月花 叙情の世界」と、関連の講座に足を運んだ<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+    <li>近代史。「旭川市関係ないけど」としつつ、坂本龍馬をテーマに配信するほど<sup class="ref"><a href="#note-23">[23]</a></sup>。</li>
+    <li>リアルアキバボーイズ（RAB）。特にネスで、名前は明言していないが「チェック柄のシャツで踊るグループの白シャツ担当」が好きだと話している<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+    <li>歌うこと。本人は上手くないとしつつも好きで<sup class="ref"><a href="#note-10">[10]</a></sup>、料理中にずっと歌っていることもある。</li>
+    <li>好きなアーティストは、40mP<sup class="ref"><a href="#note-10">[10]</a></sup>、Mrs. GREEN APPLE<sup class="ref"><a href="#note-15">[15]</a></sup>、DREAMS COME TRUE<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+  </ul>
+
+  <h2 id="channel">チャンネル特徴</h2>
+  <ul>
+    <li>チャンネルの紹介文では、旭川の話題を届けて「みーんなまとめて市民にしちゃいます」と述べており<sup class="ref"><a href="#note-1">[1]</a></sup>、動画や配信を見てくれる人をみんな「九日市民」と呼ぶ、としている<sup class="ref"><a href="#note-15">[15]</a></sup>。</li>
+    <li>動画は不定期更新で、「9」のつく日に配信することがあるとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。初配信以降の配信は、いずれも9のつく日に行われている<sup class="ref"><a href="#note-15">[15]</a></sup><sup class="ref"><a href="#note-23">[23]</a></sup>。</li>
+    <li>告知はX（旧Twitter）の<a href="https://x.com/9thnakoko">@9thnakoko</a>で行うとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
   </ul>
 
   <h2 id="history">活動歴</h2>
+  <div class="table-wrap">
   <table class="wikitable">
     <thead>
-      <tr><th>日付</th><th>出来事</th><th>出典</th></tr>
+      <tr><th>日付</th><th>出来事</th></tr>
     </thead>
     <tbody>
       <tr>
         <td class="date">2026-04-09</td>
-        <td>YouTubeチャンネルを開設</td>
-        <td class="src"><sup class="ref" id="cite-2"><a href="#note-2">[2]</a></sup></td>
+        <td>YouTubeチャンネルを開設。<sup class="ref" id="cite-2"><a href="#note-2">[2]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-04-10</td>
-        <td>Xで初投稿</td>
-        <td class="src"><sup class="ref" id="cite-3"><a href="#note-3">[3]</a></sup></td>
+        <td>Xで初投稿。この日からプロフィール画像などを少しずつ投稿し始め、以降ほぼ毎日Xへの投稿を続けている。<sup class="ref" id="cite-3"><a href="#note-3">[3]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-06-09</td>
-        <td>初めての動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-4"><a href="#note-4">[4]</a></sup></td>
+        <td>初めての動画を投稿。動画タイトルにあるとおり、動画の間ずっと画面中央にマウスカーソルが表示されたままになっている。<sup class="ref" id="cite-4"><a href="#note-4">[4]</a></sup></td>
       </tr>
       <tr>
-        <td class="date">2026-06-10</td>
-        <td>自己紹介動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-5"><a href="#note-5">[5]</a></sup></td>
+        <td class="date">2026-06-10<br>〜06-16</td>
+        <td>「スタートダッシュウィーク」と称して、7日間連続で動画を投稿。自己紹介、朗読、歌ってみた、旭川のイベントや酒造メーカーのレポートなどを公開し、最終日には今後の活動方針について話した。<sup class="ref" id="cite-5"><a href="#note-5">[5]</a></sup><sup class="ref" id="cite-6"><a href="#note-6">[6]</a></sup><sup class="ref" id="cite-7"><a href="#note-7">[7]</a></sup><sup class="ref" id="cite-8"><a href="#note-8">[8]</a></sup><sup class="ref" id="cite-9"><a href="#note-9">[9]</a></sup><sup class="ref" id="cite-10"><a href="#note-10">[10]</a></sup><sup class="ref" id="cite-11"><a href="#note-11">[11]</a></sup></td>
       </tr>
       <tr>
-        <td class="date">2026-06-11</td>
-        <td>動画の背景イラストを紹介する動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-6"><a href="#note-6">[6]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-06-12</td>
-        <td>宮沢賢治「旭川。」の朗読動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-7"><a href="#note-7">[7]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-06-13</td>
-        <td>酒を紹介する動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-8"><a href="#note-8">[8]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-06-14</td>
-        <td>菓子博あさひかわのレポート動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-9"><a href="#note-9">[9]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-06-15</td>
-        <td>歌ってみた動画「春に一番近い街」を投稿</td>
-        <td class="src"><sup class="ref" id="cite-10"><a href="#note-10">[10]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-06-16</td>
-        <td>今後の活動について話す動画を投稿</td>
-        <td class="src"><sup class="ref" id="cite-11"><a href="#note-11">[11]</a></sup></td>
+        <td class="date">2026-06-18</td>
+        <td>初めてのショート動画を投稿。自己紹介動画のNGシーン（目を紹介したいのに目をつむってしまった場面）に、自らツッコミを入れている。初配信までに計3本のショート動画を公開した。<sup class="ref" id="cite-12"><a href="#note-12">[12]</a></sup><sup class="ref" id="cite-13"><a href="#note-13">[13]</a></sup><sup class="ref" id="cite-14"><a href="#note-14">[14]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-07-09</td>
-        <td><b>初配信</b></td>
-        <td class="src"><sup class="ref" id="cite-12"><a href="#note-12">[12]</a></sup></td>
+        <td><b>初配信</b>。<sup class="ref" id="cite-15"><a href="#note-15">[15]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-07-19</td>
-        <td>配信「北海道旭川市からお送りするガチ恋口上？」</td>
-        <td class="src"><sup class="ref" id="cite-13"><a href="#note-13">[13]</a></sup></td>
+        <td>2回目の配信で、配信や動画制作のための旭川のネタの仕入れが足りないとして、1か月間の配信休止（「自由研究期間」）を発表。<sup class="ref" id="cite-16"><a href="#note-16">[16]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-08-19</td>
-        <td>配信「近況報告会」</td>
-        <td class="src"><sup class="ref" id="cite-14"><a href="#note-14">[14]</a></sup></td>
+        <td>自由研究期間明けの配信。休止中は読書（小川洋子『博士の愛した数式』）とゲーム（Nintendo Switch『Sky 星を紡ぐ子どもたち』）をしていたと話し、再び1か月の配信休止を宣言。<sup class="ref" id="cite-17"><a href="#note-17">[17]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-09-19</td>
-        <td>配信「近況が多すぎる」</td>
-        <td class="src"><sup class="ref" id="cite-15"><a href="#note-15">[15]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-09-29</td>
-        <td>配信「やっと旭川を語るぞ」</td>
-        <td class="src"><sup class="ref" id="cite-16"><a href="#note-16">[16]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-10-09</td>
-        <td>配信「のんびり雑談」</td>
-        <td class="src"><sup class="ref" id="cite-17"><a href="#note-17">[17]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-10-19</td>
-        <td>配信「自己紹介・挨拶を考えてみよう」</td>
-        <td class="src"><sup class="ref" id="cite-18"><a href="#note-18">[18]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-10-29</td>
-        <td>配信「ハロウィン（間近）の雑談」</td>
-        <td class="src"><sup class="ref" id="cite-19"><a href="#note-19">[19]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date">2026-11-09</td>
-        <td>配信「坂本龍馬の話をしたい」</td>
-        <td class="src"><sup class="ref" id="cite-20"><a href="#note-20">[20]</a></sup></td>
+        <td>配信を再開。以降はXやYouTubeのプロフィールにあるとおり、「9」の付く日に配信を続けている。<sup class="ref" id="cite-18"><a href="#note-18">[18]</a></sup><sup class="ref" id="cite-19"><a href="#note-19">[19]</a></sup><sup class="ref" id="cite-20"><a href="#note-20">[20]</a></sup><sup class="ref" id="cite-21"><a href="#note-21">[21]</a></sup><sup class="ref" id="cite-22"><a href="#note-22">[22]</a></sup><sup class="ref" id="cite-23"><a href="#note-23">[23]</a></sup></td>
       </tr>
     </tbody>
   </table>
+  </div>
 
   <h2 id="links">公式リンク</h2>
   <ul>
@@ -586,15 +587,18 @@
     <li id="note-9"><a class="backlink" href="#cite-9">^</a>「<a href="https://www.youtube.com/watch?v=NDVDPDbj-iw">【新人Vtuber】アフター菓子博あさひかわのレポ動画！！！</a>」YouTube、2026-06-14。</li>
     <li id="note-10"><a class="backlink" href="#cite-10">^</a>「<a href="https://www.youtube.com/watch?v=zcwUE64jn3E">【新人Vtuberが】春に一番近い街【歌ってみた】</a>」YouTube、2026-06-15。</li>
     <li id="note-11"><a class="backlink" href="#cite-11">^</a>「<a href="https://www.youtube.com/watch?v=eXRgWG96lik">【新人Vtuber】なここのこれから</a>」YouTube、2026-06-16。</li>
-    <li id="note-12"><a class="backlink" href="#cite-12">^</a>「<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">【初配信】北海道旭川市非公式Vtuberの初配信！！！【新人Vtuber】</a>」YouTube、2026-07-09。</li>
-    <li id="note-13"><a class="backlink" href="#cite-13">^</a>「<a href="https://www.youtube.com/watch?v=DbZ_Tuz394M">【LIVE】北海道旭川市からお送りするガチ恋口上？【新人Vtuber】</a>」YouTube、2026-07-19。</li>
-    <li id="note-14"><a class="backlink" href="#cite-14">^</a>「<a href="https://www.youtube.com/watch?v=oIgCAWzk10M">【LIVE】九日なここの近況報告会【新人Vtuber】</a>」YouTube、2026-08-19。</li>
-    <li id="note-15"><a class="backlink" href="#cite-15">^</a>「<a href="https://www.youtube.com/watch?v=Q3CBdbN64Uk">【LIVE】九日なここの近況が多すぎる！！！【新人Vtuber】</a>」YouTube、2026-09-19。</li>
-    <li id="note-16"><a class="backlink" href="#cite-16">^</a>「<a href="https://www.youtube.com/watch?v=H25-y97mdyg">【LIVE】九日なここがやっと旭川を語るぞ！！！【新人Vtuber】</a>」YouTube、2026-09-29。</li>
-    <li id="note-17"><a class="backlink" href="#cite-17">^</a>「<a href="https://www.youtube.com/watch?v=tDt_e-socPg">【LIVE】今日は議題なし！のんびり雑談【新人Vtuber】</a>」YouTube、2026-10-09。</li>
-    <li id="note-18"><a class="backlink" href="#cite-18">^</a>「<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">【LIVE】九日なここの自己紹介・挨拶を考えてみよう！！！【新人Vtuber】</a>」YouTube、2026-10-19。</li>
-    <li id="note-19"><a class="backlink" href="#cite-19">^</a>「<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">【LIVE】ハロウィン（間近）の雑談！！！【新人Vtuber】</a>」YouTube、2026-10-29。</li>
-    <li id="note-20"><a class="backlink" href="#cite-20">^</a>「<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">【LIVE】旭川市関係ないけど「坂本龍馬」の話をしたい！！！【新人Vtuber】</a>」YouTube、2026-11-09。</li>
+    <li id="note-12"><a class="backlink" href="#cite-12">^</a>「<a href="https://www.youtube.com/watch?v=86hTpUEGP38">九日なここのお目目のこだわり👀 #vtuber　#shorts</a>」YouTube、2026-06-18。</li>
+    <li id="note-13"><a class="backlink" href="#cite-13">^</a>「<a href="https://www.youtube.com/watch?v=CakMeClx8yk">「この黒布」が言えなくて#vtuber #shorts</a>」YouTube、2026-06-20。</li>
+    <li id="note-14"><a class="backlink" href="#cite-14">^</a>「<a href="https://www.youtube.com/watch?v=gRzuACAWLJA">ポップガードの重要性（？） #新人vtuber #vtuber#shorts #初配信</a>」YouTube、2026-06-27。</li>
+    <li id="note-15"><a class="backlink" href="#cite-15">^</a>「<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">【初配信】北海道旭川市非公式Vtuberの初配信！！！【新人Vtuber】</a>」YouTube、2026-07-09。</li>
+    <li id="note-16"><a class="backlink" href="#cite-16">^</a>「<a href="https://www.youtube.com/watch?v=DbZ_Tuz394M">【LIVE】北海道旭川市からお送りするガチ恋口上？【新人Vtuber】</a>」YouTube、2026-07-19。</li>
+    <li id="note-17"><a class="backlink" href="#cite-17">^</a>「<a href="https://www.youtube.com/watch?v=oIgCAWzk10M">【LIVE】九日なここの近況報告会【新人Vtuber】</a>」YouTube、2026-08-19。</li>
+    <li id="note-18"><a class="backlink" href="#cite-18">^</a>「<a href="https://www.youtube.com/watch?v=Q3CBdbN64Uk">【LIVE】九日なここの近況が多すぎる！！！【新人Vtuber】</a>」YouTube、2026-09-19。</li>
+    <li id="note-19"><a class="backlink" href="#cite-19">^</a>「<a href="https://www.youtube.com/watch?v=H25-y97mdyg">【LIVE】九日なここがやっと旭川を語るぞ！！！【新人Vtuber】</a>」YouTube、2026-09-29。</li>
+    <li id="note-20"><a class="backlink" href="#cite-20">^</a>「<a href="https://www.youtube.com/watch?v=tDt_e-socPg">【LIVE】今日は議題なし！のんびり雑談【新人Vtuber】</a>」YouTube、2026-10-09。</li>
+    <li id="note-21"><a class="backlink" href="#cite-21">^</a>「<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">【LIVE】九日なここの自己紹介・挨拶を考えてみよう！！！【新人Vtuber】</a>」YouTube、2026-10-19。</li>
+    <li id="note-22"><a class="backlink" href="#cite-22">^</a>「<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">【LIVE】ハロウィン（間近）の雑談！！！【新人Vtuber】</a>」YouTube、2026-10-29。</li>
+    <li id="note-23"><a class="backlink" href="#cite-23">^</a>「<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">【LIVE】旭川市関係ないけど「坂本龍馬」の話をしたい！！！【新人Vtuber】</a>」YouTube、2026-11-09。</li>
   </ol>
 
 </article>
@@ -602,7 +606,7 @@
 
 <footer>
   <p>当サイトは九日なここさんを応援するファンによる非公式サイトです。掲載内容の誤りや削除のご要望は <a href="https://github.com/otocolobuslove/9th-city-site/discussions">GitHub Discussions</a> までお知らせください。</p>
-  <p>最終更新：2026-11-11（日付は日本時間）</p>
+  <p>最終更新：2026-11-12（日付は日本時間）</p>
 </footer>
 
 </body>
