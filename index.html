@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>九日なここ 活動まとめ（非公式ファンサイト）</title>
-<meta name="description" content="旭川市非公認VTuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
-<meta property="og:title" content="九日なここ 活動まとめ（非公式ファンサイト）">
-<meta property="og:description" content="旭川市非公認VTuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
+<title>北海道九日市報～九日なここだより～</title>
+<meta name="description" content="旭川市非公式Vtuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
+<meta property="og:title" content="北海道九日市報～九日なここだより～">
+<meta property="og:description" content="旭川市非公式Vtuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
 <meta property="og:type" content="website">
 <style>
   /* ===== 配色：雪・氷・冬の夜空 ===== */
@@ -26,6 +26,7 @@
     --todo: #a14a06;
     --todo-bg: #fff3e2;
     --snow: rgba(255, 255, 255, 0.85);
+    --silhouette: #2f456b;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -43,6 +44,7 @@
       --line-soft: #233247;
       --todo: #f2b26b;
       --todo-bg: #3a2814;
+      --silhouette: #6f86a6;
     }
   }
   :root[data-theme="dark"] {
@@ -60,6 +62,7 @@
     --line-soft: #233247;
     --todo: #f2b26b;
     --todo-bg: #3a2814;
+    --silhouette: #6f86a6;
   }
 
   * { box-sizing: border-box; }
@@ -231,15 +234,24 @@
     text-align: center;
     padding: 0.75rem;
   }
-  .no-image {
-    display: grid;
-    place-items: center;
-    height: 150px;
+  .silhouette {
+    margin: 0;
+  }
+  .silhouette svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+  }
+  .silhouette .sky-top    { stop-color: var(--frost); }
+  .silhouette .sky-bottom { stop-color: var(--paper); }
+  .silhouette .snow       { fill: var(--link); opacity: 0.25; }
+  .silhouette .figure     { fill: var(--silhouette); }
+  .silhouette .ground     { fill: var(--paper); stroke: var(--line); }
+  .silhouette figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
     color: var(--muted);
-    font-size: 0.78rem;
-    border: 1px dashed var(--line);
-    background:
-      repeating-linear-gradient(45deg, transparent 0 8px, var(--line-soft) 8px 9px);
   }
   .infobox th, .infobox td {
     padding: 0.35rem 0.6rem;
@@ -252,6 +264,14 @@
     background: var(--frost);
     font-weight: 600;
     white-space: nowrap;
+  }
+  .infobox th small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    white-space: normal;
+    color: var(--muted);
   }
   .infobox .group th {
     text-align: center;
@@ -349,8 +369,8 @@
 
 <header class="site-header">
   <div class="inner">
-    <span class="site-name">九日なここ 活動まとめ</span>
-    <span class="site-tag">旭川市非公認VTuber・九日なここさんの非公式ファンWiki</span>
+    <span class="site-name">北海道九日市報～九日なここだより～</span>
+    <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式ファンWiki</span>
   </div>
   <div class="drift" aria-hidden="true"></div>
 </header>
@@ -367,24 +387,59 @@
 
   <table class="infobox">
     <caption>九日なここ<small>ここのか なここ</small></caption>
-    <tr><td class="image-cell" colspan="2"><div class="no-image">画像は権利確認後に掲載予定</div></td></tr>
+    <tr><td class="image-cell" colspan="2">
+      <figure class="silhouette">
+        <svg viewBox="0 0 240 200" role="img" aria-label="人型のシルエット（仮画像）">
+          <defs>
+            <linearGradient id="sil-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" class="sky-top"/>
+              <stop offset="1" class="sky-bottom"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="200" fill="url(#sil-sky)"/>
+          <g class="snow">
+            <circle cx="22" cy="24" r="2.5"/><circle cx="58" cy="62" r="1.8"/>
+            <circle cx="36" cy="118" r="2.2"/><circle cx="198" cy="30" r="2.4"/>
+            <circle cx="214" cy="92" r="1.8"/><circle cx="184" cy="140" r="2.2"/>
+            <circle cx="88" cy="18" r="1.6"/><circle cx="160" cy="70" r="1.6"/>
+            <circle cx="16" cy="170" r="1.8"/><circle cx="226" cy="168" r="1.6"/>
+          </g>
+          <g class="figure">
+            <circle cx="97" cy="50" r="12"/>
+            <circle cx="143" cy="50" r="12"/>
+            <circle cx="120" cy="74" r="30"/>
+            <path d="M120 112c-38 0-62 22-66 60l-2 28h136l-2-28c-4-38-28-60-66-60z"/>
+          </g>
+          <path class="ground" d="M0 186c30-8 60-8 90-2s70 6 100-2 40-4 50-1V200H0z"/>
+        </svg>
+        <figcaption>仮画像</figcaption>
+      </figure>
+    </td></tr>
     <tr class="group"><th colspan="2">基本情報</th></tr>
-    <tr><th>肩書き</th><td>旭川市非公認VTuber</td></tr>
-    <tr><th>拠点</th><td>北海道旭川市</td></tr>
-    <tr><th>活動開始</th><td><span class="todo">【要記入】</span></td></tr>
-    <tr><th>誕生日</th><td><span class="todo">【要記入】</span></td></tr>
-    <tr class="group"><th colspan="2">ファン</th></tr>
-    <tr><th>呼び名</th><td><span class="todo">【要記入】</span></td></tr>
-    <tr><th>タグ</th><td><span class="todo">【要記入】配信 / ファンアート</span></td></tr>
+    <tr><th>肩書き</th><td>旭川市非公式Vtuber<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr><th>出身</th><td>北海道旭川市<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr><th>活動開始</th><td>2026年6月9日（初動画）<sup class="ref"><a href="#note-4">[4]</a></sup></td></tr>
+    <tr><th>アカウント開設</th><td>YouTube：2026年4月9日<sup class="ref"><a href="#note-2">[2]</a></sup><br>X：2026年4月（初投稿は4月10日）<sup class="ref"><a href="#note-3">[3]</a></sup></td></tr>
+    <tr><th>初配信</th><td>2026年7月9日<sup class="ref"><a href="#note-12">[12]</a></sup></td></tr>
+    <tr><th>誕生日</th><td>7月9日</td></tr>
+    <tr class="group"><th colspan="2">制作</th></tr>
+    <tr><th>ママ兼パパ<small>（イラストレーター兼Live2Dモデラー）</small></th><td><a href="https://x.com/yukino_kureha">紅葉雪乃</a><sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr><th>配信背景・<br>コメント枠</th><td><a href="https://x.com/mgnghn_mmn">めがねごはん</a><sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr class="group"><th colspan="2">タグ</th></tr>
+    <tr><th>総合</th><td>#九日なここ<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
+    <tr><th>配信</th><td>#きょうは九日</td></tr>
+    <tr><th>ファンアート</th><td>#市立九日美術館</td></tr>
+    <tr><th>ファンネーム</th><td>#九日市民</td></tr>
     <tr class="group"><th colspan="2">公式</th></tr>
-    <tr><th>YouTube</th><td><span class="todo">【要記入】</span></td></tr>
-    <tr><th>X</th><td><span class="todo">【要記入】</span></td></tr>
+    <tr><th>YouTube</th><td><a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93">@9th.nakoko九日なここ</a></td></tr>
+    <tr><th>X</th><td><a href="https://x.com/9thnakoko">@9thnakoko</a></td></tr>
   </table>
 
   <p id="overview">
-    <b>九日なここ</b>（ここのか なここ）は、北海道旭川市を拠点に活動する「旭川市非公認」のVTuber。
-    <span class="todo">【要記入】活動開始時期</span>から
-    <span class="todo">【要記入】YouTube / X など主な活動場所</span>で活動している。
+    <b>九日なここ</b>（ここのか なここ）は、北海道旭川市を拠点に活動する「旭川市非公式」のVTuber。
+    旭川市生まれを名乗り、旭川の話題を届けることを掲げている<sup class="ref" id="cite-1"><a href="#note-1">[1]</a></sup>。
+    2026年4月9日にYouTubeチャンネルを開設し<sup class="ref"><a href="#note-2">[2]</a></sup>、翌10日にXで初投稿した<sup class="ref"><a href="#note-3">[3]</a></sup>。6月9日からYouTubeで動画の投稿を始め<sup class="ref"><a href="#note-4">[4]</a></sup>、
+    同年7月9日に初配信を行った<sup class="ref"><a href="#note-12">[12]</a></sup>。
   </p>
 
   <nav class="toc" aria-label="目次">
@@ -399,9 +454,10 @@
 
   <h2 id="person">人物</h2>
   <ul>
-    <li><span class="todo">【要記入】一人称・口調</span></li>
-    <li><span class="todo">【要記入】配信の雰囲気（例：雑談が中心 など）</span></li>
-    <li><span class="todo">【要記入】好きなもの・旭川にまつわる話題</span></li>
+    <li>チャンネルの紹介文では、旭川の話題を届けて「みーんなまとめて市民にしちゃいます」と述べている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
+    <li>動画は不定期更新で、「9」のつく日に配信することがあるとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。初配信以降の配信は、いずれも9のつく日に行われている<sup class="ref"><a href="#note-12">[12]</a></sup><sup class="ref"><a href="#note-20">[20]</a></sup>。</li>
+    <li>告知はX（旧Twitter）の<a href="https://x.com/9thnakoko">@9thnakoko</a>で行うとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
+    <li>一人称は「なここ」。</li>
   </ul>
 
   <h2 id="history">活動歴</h2>
@@ -411,42 +467,139 @@
     </thead>
     <tbody>
       <tr>
-        <td class="date"><span class="todo">YYYY-MM-DD</span></td>
-        <td>活動開始（初配信）</td>
-        <td class="src"><sup class="ref" id="cite-1"><a href="#note-1">[1]</a></sup></td>
-      </tr>
-      <tr>
-        <td class="date"><span class="todo">YYYY-MM-DD</span></td>
-        <td><span class="todo">【要記入】出来事（記念配信・コラボなど）</span></td>
+        <td class="date">2026-04-09</td>
+        <td>YouTubeチャンネルを開設</td>
         <td class="src"><sup class="ref" id="cite-2"><a href="#note-2">[2]</a></sup></td>
       </tr>
       <tr>
-        <td class="date"><span class="todo">YYYY-MM-DD</span></td>
-        <td><span class="todo">【要記入】出来事</span></td>
+        <td class="date">2026-04-10</td>
+        <td>Xで初投稿</td>
         <td class="src"><sup class="ref" id="cite-3"><a href="#note-3">[3]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-09</td>
+        <td>初めての動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-4"><a href="#note-4">[4]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-10</td>
+        <td>自己紹介動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-5"><a href="#note-5">[5]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-11</td>
+        <td>動画の背景イラストを紹介する動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-6"><a href="#note-6">[6]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-12</td>
+        <td>宮沢賢治「旭川。」の朗読動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-7"><a href="#note-7">[7]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-13</td>
+        <td>酒を紹介する動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-8"><a href="#note-8">[8]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-14</td>
+        <td>菓子博あさひかわのレポート動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-9"><a href="#note-9">[9]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-15</td>
+        <td>歌ってみた動画「春に一番近い街」を投稿</td>
+        <td class="src"><sup class="ref" id="cite-10"><a href="#note-10">[10]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-06-16</td>
+        <td>今後の活動について話す動画を投稿</td>
+        <td class="src"><sup class="ref" id="cite-11"><a href="#note-11">[11]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-07-09</td>
+        <td><b>初配信</b></td>
+        <td class="src"><sup class="ref" id="cite-12"><a href="#note-12">[12]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-07-19</td>
+        <td>配信「北海道旭川市からお送りするガチ恋口上？」</td>
+        <td class="src"><sup class="ref" id="cite-13"><a href="#note-13">[13]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-08-19</td>
+        <td>配信「近況報告会」</td>
+        <td class="src"><sup class="ref" id="cite-14"><a href="#note-14">[14]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-09-19</td>
+        <td>配信「近況が多すぎる」</td>
+        <td class="src"><sup class="ref" id="cite-15"><a href="#note-15">[15]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-09-29</td>
+        <td>配信「やっと旭川を語るぞ」</td>
+        <td class="src"><sup class="ref" id="cite-16"><a href="#note-16">[16]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-10-09</td>
+        <td>配信「のんびり雑談」</td>
+        <td class="src"><sup class="ref" id="cite-17"><a href="#note-17">[17]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-10-19</td>
+        <td>配信「自己紹介・挨拶を考えてみよう」</td>
+        <td class="src"><sup class="ref" id="cite-18"><a href="#note-18">[18]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-10-29</td>
+        <td>配信「ハロウィン（間近）の雑談」</td>
+        <td class="src"><sup class="ref" id="cite-19"><a href="#note-19">[19]</a></sup></td>
+      </tr>
+      <tr>
+        <td class="date">2026-11-09</td>
+        <td>配信「坂本龍馬の話をしたい」</td>
+        <td class="src"><sup class="ref" id="cite-20"><a href="#note-20">[20]</a></sup></td>
       </tr>
     </tbody>
   </table>
 
   <h2 id="links">公式リンク</h2>
   <ul>
-    <li>YouTube：<span class="todo">【要記入】URL</span></li>
-    <li>X：<span class="todo">【要記入】URL</span></li>
+    <li>YouTube：<a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93">九日なここ@旭川市非公式Vtuber</a></li>
+    <li>X：<a href="https://x.com/9thnakoko">九日なここ@旭川非公式Vtuber（@9thnakoko）</a></li>
   </ul>
 
   <h2 id="notes">脚注</h2>
   <ol class="references">
-    <li id="note-1"><a class="backlink" href="#cite-1">^</a>「<span class="todo">【要記入】配信タイトル</span>」YouTube、<span class="todo">YYYY-MM-DD</span>。<span class="todo">【要記入】URL</span></li>
-    <li id="note-2"><a class="backlink" href="#cite-2">^</a><span class="todo">【要記入】</span>のポスト、X、<span class="todo">YYYY-MM-DD</span>。<span class="todo">【要記入】URL</span></li>
-    <li id="note-3"><a class="backlink" href="#cite-3">^</a>「<span class="todo">【要記入】配信タイトル</span>」YouTube、<span class="todo">YYYY-MM-DD</span>。<span class="todo">【要記入】URL</span></li>
+    <li id="note-1"><a class="backlink" href="#cite-1">^</a>「<a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93">九日なここ@旭川市非公式Vtuber</a>」チャンネル紹介文、YouTube。2026-11-11 閲覧。</li>
+    <li id="note-2"><a class="backlink" href="#cite-2">^</a>「<a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93/about">九日なここ@旭川市非公式Vtuber</a>」チャンネル概要（登録日）、YouTube。2026-11-11 閲覧。</li>
+    <li id="note-3"><a class="backlink" href="#cite-3">^</a>九日なここ（<a href="https://x.com/9thnakoko">@9thnakoko</a>）の<a href="https://x.com/9thnakoko/status/2042262484300734564">初投稿</a>、X、2026-04-10。</li>
+    <li id="note-4"><a class="backlink" href="#cite-4">^</a>「<a href="https://www.youtube.com/watch?v=cqTOTwVG5cM">【新人Vtuber】九日なここの初動画！【マウスカーソルのおまけつき】</a>」YouTube、2026-06-09。</li>
+    <li id="note-5"><a class="backlink" href="#cite-5">^</a>「<a href="https://www.youtube.com/watch?v=dmv8NNEPzHc">【新人Vtuber】九日なここの自己紹介！！！</a>」YouTube、2026-06-10。</li>
+    <li id="note-6"><a class="backlink" href="#cite-6">^</a>「<a href="https://www.youtube.com/watch?v=_y10AYnh5Eg">【NO案件】動画の背景イラストのご紹介！！！【あさなみ】</a>」YouTube、2026-06-11。</li>
+    <li id="note-7"><a class="backlink" href="#cite-7">^</a>「<a href="https://www.youtube.com/watch?v=aAFq4wgVLVY">【朗読】宮沢賢治「旭川。」</a>」YouTube、2026-06-12。</li>
+    <li id="note-8"><a class="backlink" href="#cite-8">^</a>「<a href="https://www.youtube.com/watch?v=_Gc1xr4c8fE">【新人Vtuber】一般市民が酒を紹介する！！！</a>」YouTube、2026-06-13。</li>
+    <li id="note-9"><a class="backlink" href="#cite-9">^</a>「<a href="https://www.youtube.com/watch?v=NDVDPDbj-iw">【新人Vtuber】アフター菓子博あさひかわのレポ動画！！！</a>」YouTube、2026-06-14。</li>
+    <li id="note-10"><a class="backlink" href="#cite-10">^</a>「<a href="https://www.youtube.com/watch?v=zcwUE64jn3E">【新人Vtuberが】春に一番近い街【歌ってみた】</a>」YouTube、2026-06-15。</li>
+    <li id="note-11"><a class="backlink" href="#cite-11">^</a>「<a href="https://www.youtube.com/watch?v=eXRgWG96lik">【新人Vtuber】なここのこれから</a>」YouTube、2026-06-16。</li>
+    <li id="note-12"><a class="backlink" href="#cite-12">^</a>「<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">【初配信】北海道旭川市非公式Vtuberの初配信！！！【新人Vtuber】</a>」YouTube、2026-07-09。</li>
+    <li id="note-13"><a class="backlink" href="#cite-13">^</a>「<a href="https://www.youtube.com/watch?v=DbZ_Tuz394M">【LIVE】北海道旭川市からお送りするガチ恋口上？【新人Vtuber】</a>」YouTube、2026-07-19。</li>
+    <li id="note-14"><a class="backlink" href="#cite-14">^</a>「<a href="https://www.youtube.com/watch?v=oIgCAWzk10M">【LIVE】九日なここの近況報告会【新人Vtuber】</a>」YouTube、2026-08-19。</li>
+    <li id="note-15"><a class="backlink" href="#cite-15">^</a>「<a href="https://www.youtube.com/watch?v=Q3CBdbN64Uk">【LIVE】九日なここの近況が多すぎる！！！【新人Vtuber】</a>」YouTube、2026-09-19。</li>
+    <li id="note-16"><a class="backlink" href="#cite-16">^</a>「<a href="https://www.youtube.com/watch?v=H25-y97mdyg">【LIVE】九日なここがやっと旭川を語るぞ！！！【新人Vtuber】</a>」YouTube、2026-09-29。</li>
+    <li id="note-17"><a class="backlink" href="#cite-17">^</a>「<a href="https://www.youtube.com/watch?v=tDt_e-socPg">【LIVE】今日は議題なし！のんびり雑談【新人Vtuber】</a>」YouTube、2026-10-09。</li>
+    <li id="note-18"><a class="backlink" href="#cite-18">^</a>「<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">【LIVE】九日なここの自己紹介・挨拶を考えてみよう！！！【新人Vtuber】</a>」YouTube、2026-10-19。</li>
+    <li id="note-19"><a class="backlink" href="#cite-19">^</a>「<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">【LIVE】ハロウィン（間近）の雑談！！！【新人Vtuber】</a>」YouTube、2026-10-29。</li>
+    <li id="note-20"><a class="backlink" href="#cite-20">^</a>「<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">【LIVE】旭川市関係ないけど「坂本龍馬」の話をしたい！！！【新人Vtuber】</a>」YouTube、2026-11-09。</li>
   </ol>
 
 </article>
 </main>
 
 <footer>
-  <p>当サイトは九日なここさんを応援するファンによる非公式サイトです。掲載内容の誤りや削除のご要望は <span class="todo">【要記入】連絡先</span> までお知らせください。</p>
-  <p>最終更新：<span class="todo">YYYY-MM-DD</span></p>
+  <p>当サイトは九日なここさんを応援するファンによる非公式サイトです。掲載内容の誤りや削除のご要望は <a href="https://github.com/otocolobuslove/9th-city-site/discussions">GitHub Discussions</a> までお知らせください。</p>
+  <p>最終更新：2026-11-11（日付は日本時間）</p>
 </footer>
 
 </body>
