@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>要望の送り方 | 北海道九日市報 ～ 九日なここ だより ～</title>
+<meta name="description" content="北海道九日市報（九日なここさんの非公式まとめサイト）への訂正・追加・削除の要望を、GitHub Discussions で送る方法を、アカウントの作り方から紹介します。">
+<meta property="og:title" content="要望の送り方 | 北海道九日市報 ～ 九日なここ だより ～">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://otocolobuslove.github.io/9th-city-site/request.html">
+<link rel="canonical" href="https://otocolobuslove.github.io/9th-city-site/request.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  /* ===== 配色：雪・氷・冬の夜空 ===== */
+  :root {
+    --page: #eef3f8;          /* 雪明かりの地 */
+    --paper: #ffffff;         /* 記事面 */
+    --text: #1d2633;
+    --muted: #5d6b7c;
+    --link: #2a62a6;          /* 氷の青 */
+    --link-visited: #5a4f9c;
+    --night: #17233a;         /* 冬の夜空 */
+    --night-2: #24375a;
+    --frost: #e4edf6;         /* 霜の青 */
+    --frost-2: #f4f8fc;
+    --line: #c9d5e3;
+    --line-soft: #e2e9f1;
+    --todo: #a14a06;
+    --todo-bg: #fff3e2;
+    --snow: rgba(255, 255, 255, 0.85);
+    --silhouette: #2f456b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0d1420;
+      --paper: #141d2b;
+      --text: #dfe7f1;
+      --muted: #95a3b5;
+      --link: #8cbcf0;
+      --link-visited: #b4a8ea;
+      --night: #0a1019;
+      --night-2: #1a2a45;
+      --frost: #1c2a3e;
+      --frost-2: #172234;
+      --line: #2e3e55;
+      --line-soft: #233247;
+      --todo: #f2b26b;
+      --todo-bg: #3a2814;
+      --silhouette: #6f86a6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0d1420;
+    --paper: #141d2b;
+    --text: #dfe7f1;
+    --muted: #95a3b5;
+    --link: #8cbcf0;
+    --link-visited: #b4a8ea;
+    --night: #0a1019;
+    --night-2: #1a2a45;
+    --frost: #1c2a3e;
+    --frost-2: #172234;
+    --line: #2e3e55;
+    --line-soft: #233247;
+    --todo: #f2b26b;
+    --todo-bg: #3a2814;
+    --silhouette: #6f86a6;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text);
+    background: var(--page);
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:visited { color: var(--link-visited); }
+
+  /* ===== サイトヘッダー（夜空＋雪） ===== */
+  .site-header {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+  }
+  .site-header::before,
+  .site-header::after {
+    content: "";
+    position: absolute;
+    inset: -200px 0 0 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, var(--snow), transparent),
+      radial-gradient(1.5px 1.5px at 80px 120px, var(--snow), transparent),
+      radial-gradient(2.5px 2.5px at 150px 60px, var(--snow), transparent),
+      radial-gradient(1.5px 1.5px at 210px 160px, var(--snow), transparent),
+      radial-gradient(2px 2px at 260px 20px, var(--snow), transparent),
+      radial-gradient(1px 1px at 120px 180px, var(--snow), transparent);
+    background-size: 300px 200px;
+    animation: snowfall 14s linear infinite;
+  }
+  .site-header::after {
+    background-size: 220px 170px;
+    opacity: 0.55;
+    animation-duration: 22s;
+  }
+  @keyframes snowfall {
+    from { transform: translateY(0); }
+    to   { transform: translateY(200px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header::before, .site-header::after { animation: none; }
+  }
+  .site-header .inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0.9rem 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+    flex-wrap: wrap;
+  }
+  .site-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+  }
+  .site-name::before { content: "❄ "; color: #bcd8f5; }
+  .site-tag { font-size: 0.8rem; color: #b8c7da; }
+  /* 雪の積もった縁 */
+  .site-header .drift {
+    position: relative;
+    z-index: 1;
+    height: 10px;
+    background:
+      radial-gradient(14px 10px at 14px 0, var(--page) 98%, transparent) 0 100% / 28px 10px repeat-x;
+    transform: translateY(1px);
+  }
+
+  .notice {
+    max-width: 1080px;
+    margin: 0.75rem auto 0;
+    padding: 0 16px;
+  }
+  .notice p {
+    margin: 0;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: var(--frost-2);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--link);
+  }
+
+  /* ===== 記事 ===== */
+  main {
+    max-width: 1080px;
+    margin: 0.75rem auto 0;
+    padding: 0 16px;
+  }
+  article {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 1.5rem 2rem 2rem;
+  }
+  article::after { content: ""; display: block; clear: both; }
+
+  .title {
+    margin: 0;
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.4;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.25rem;
+  }
+  .subtitle {
+    margin: 0.3rem 0 1.25rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  h2 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden; /* 下線をインフォボックスの手前で止める */
+  }
+  h2::before {
+    content: "❅";
+    font-size: 0.85em;
+    color: var(--link);
+    margin-right: 0.4em;
+    opacity: 0.7;
+  }
+  h3 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 1.25rem 0 0.4rem;
+  }
+  li > ul { margin: 0.1rem 0 0.2rem; }
+  ol.features { margin: 0.1rem 0 0.2rem; padding-left: 0.4em; list-style: none; }
+  p { margin: 0.6rem 0; }
+
+  /* ===== インフォボックス ===== */
+  .infobox {
+    float: right;
+    width: 290px;
+    margin: 0 0 1rem 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--frost-2);
+    font-size: 0.86rem;
+    line-height: 1.6;
+    border-collapse: collapse;
+  }
+  .infobox caption {
+    caption-side: top;
+    padding: 0.55rem 0.5rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    background: linear-gradient(180deg, var(--night-2), var(--night));
+    border: 1px solid var(--line);
+    border-bottom: none;
+  }
+  .infobox caption small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: #c5d4e6;
+  }
+  .infobox .image-cell {
+    text-align: center;
+    padding: 0.75rem;
+  }
+  .silhouette {
+    margin: 0;
+  }
+  .silhouette svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+  }
+  .silhouette .sky-top    { stop-color: var(--frost); }
+  .silhouette .sky-bottom { stop-color: var(--paper); }
+  .silhouette .snow       { fill: var(--link); opacity: 0.25; }
+  .silhouette .figure     { fill: var(--silhouette); }
+  .silhouette .ground     { fill: var(--paper); stroke: var(--line); }
+  .silhouette figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .infobox th, .infobox td {
+    padding: 0.35rem 0.6rem;
+    border-top: 1px solid var(--line-soft);
+    text-align: left;
+    vertical-align: top;
+  }
+  .infobox th {
+    width: 38%;
+    background: var(--frost);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .infobox th small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    white-space: normal;
+    color: var(--muted);
+  }
+  .infobox td small.note {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .infobox .group th {
+    text-align: center;
+    background: var(--frost);
+    color: var(--link);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== 目次 ===== */
+  .toc {
+    display: inline-block;
+    min-width: 220px;
+    margin: 0.75rem 0 0.5rem;
+    padding: 0.6rem 1.2rem 0.7rem 1rem;
+    border: 1px solid var(--line);
+    background: var(--frost-2);
+    font-size: 0.9rem;
+  }
+  .toc-title {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .toc ol { margin: 0; padding-left: 0; list-style: none; counter-reset: toc; }
+  .toc ol ol { padding-left: 1.2em; }
+  .toc li { margin: 0.1rem 0; counter-increment: toc; }
+  .toc li::before { content: counters(toc, ".") ". "; color: var(--muted); }
+
+  /* ===== 表（wikitable） ===== */
+  .wikitable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.92rem;
+    background: var(--frost-2);
+  }
+  .wikitable th, .wikitable td {
+    border: 1px solid var(--line);
+    padding: 0.4rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .wikitable thead th {
+    background: var(--frost);
+    text-align: center;
+  }
+  .wikitable td.date { white-space: nowrap; width: 7.5rem; }
+  .wikitable tbody tr:nth-child(even) td { background: var(--paper); }
+
+  sup.ref { font-size: 0.75em; line-height: 0; }
+  sup.ref a { padding: 0 0.1em; }
+
+  /* ===== 脚注 ===== */
+  .references {
+    font-size: 0.86rem;
+    padding-left: 1.8rem;
+    margin: 0.5rem 0;
+  }
+  .references li { margin: 0.2rem 0; }
+  .references li:target { background: var(--frost); }
+  .backlink { font-weight: 700; margin-right: 0.3em; }
+
+  .todo {
+    color: var(--todo);
+    background: var(--todo-bg);
+    padding: 0 0.3rem;
+    border-radius: 3px;
+  }
+
+  /* ===== フッター ===== */
+  footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1.25rem 16px 3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer p { margin: 0.3rem 0; }
+
+  /* 表はインフォボックスの横の残り幅に収める（入らなければ下に回る） */
+  .table-wrap {
+    overflow-x: auto;
+    min-width: min(100%, 26rem);
+  }
+  .table-wrap .wikitable { margin: 0.75rem 0; }
+
+  /* ===== タブレット ===== */
+  @media (max-width: 960px) {
+    .infobox {
+      float: none;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 1.25rem;
+    }
+  }
+
+  /* ===== スマホ ===== */
+  @media (max-width: 720px) {
+    article { padding: 1rem 1rem 1.5rem; }
+    .title { font-size: 1.6rem; }
+    .infobox { float: none; width: 100%; margin: 0 0 1rem; }
+    .toc { display: block; }
+    .wikitable thead { display: none; }
+    .wikitable, .wikitable tbody, .wikitable tr, .wikitable td { display: block; width: auto !important; }
+    .wikitable tr { border: 1px solid var(--line); margin-bottom: 0.5rem; }
+    .wikitable td { border: none; padding: 0.2rem 0.65rem; text-align: left !important; }
+    .wikitable td.date { font-weight: 700; color: var(--link); padding-top: 0.45rem; }
+  }
+
+  /* ===== 要望の送り方ページ ===== */
+  .site-name a { color: inherit; text-decoration: none; }
+  .crumb { font-size: 0.85rem; margin: 0 0 0.75rem; }
+  .crumb:last-child { margin: 2rem 0 0; }
+  .callout {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--link);
+    background: var(--frost-2);
+    padding: 0.6rem 1rem;
+    margin: 1rem 0;
+  }
+  .callout-title { margin: 0 0 0.2rem; font-weight: 700; }
+  .callout ol { margin: 0; padding-left: 1.4rem; }
+  .hint { font-size: 0.86rem; color: var(--muted); }
+  .ui {
+    display: inline-block;
+    padding: 0 0.4em;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--frost);
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.85em;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  ol.steps { padding-left: 1.6rem; }
+  ol.steps > li { margin: 0.45rem 0; }
+  ol.steps > li::marker { font-weight: 700; color: var(--link); }
+  .wikitable.cat { width: auto; margin: 0.5rem 0; }
+  .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background: var(--link);
+    color: var(--paper) !important;
+    font-weight: 700;
+    text-decoration: none !important;
+  }
+  .button:hover { filter: brightness(1.1); }
+  .example {
+    border: 1px dashed var(--line);
+    background: var(--frost-2);
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.92rem;
+  }
+  .example p { margin: 0.2rem 0; }
+  .example ul { margin: 0.2rem 0; }
+  @media (max-width: 720px) {
+    .wikitable.cat thead { display: table-header-group; }
+    .wikitable.cat, .wikitable.cat tbody, .wikitable.cat tr, .wikitable.cat td { display: revert; width: auto !important; }
+    .wikitable.cat td { border: 1px solid var(--line); padding: 0.35rem 0.6rem; }
+    .ui { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <span class="site-name"><a href="./">北海道九日市報 ～ 九日なここ だより ～</a></span>
+    <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式まとめサイト</span>
+  </div>
+  <div class="drift" aria-hidden="true"></div>
+</header>
+
+<div class="notice">
+  <p>これは九日市民の自費出版による市報です。九日なここご本人さまと直接は関係ありません。</p>
+</div>
+
+<main>
+<article>
+
+  <p class="crumb"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
+
+  <h1 class="title">要望の送り方</h1>
+  <p class="subtitle">GitHub Discussions で、掲載内容の訂正・追加・削除のご要望を受け付けています</p>
+
+  <p>
+    このサイトへのご要望は、<b>GitHub（ギットハブ）</b>というサービスの「<b>Discussions（ディスカッション）</b>」という掲示板で受け付けています。
+    GitHub は無料で使えます。アカウントを作ったことがない方でも、このページの手順どおりに進めれば、10分ほどで投稿できます。
+  </p>
+
+  <div class="callout">
+    <p class="callout-title">流れ</p>
+    <ol>
+      <li><a href="#account">GitHub のアカウントを作る</a>（すでに持っている方は飛ばしてOK）</li>
+      <li><a href="#email">メールアドレスを守る設定をする</a>（任意・気になる方だけ）</li>
+      <li><a href="#post">Discussions に要望を投稿する</a></li>
+    </ol>
+  </div>
+
+  <p class="hint">GitHub の画面は英語です。このページでは、押すボタンを <span class="ui">Sign up</span> のように表示しています。画面のデザインは変わることがあるので、多少違っていても近い名前のボタンを探してみてください。</p>
+
+  <h2 id="account">GitHub のアカウントを作る</h2>
+  <ol class="steps">
+    <li>
+      <a href="https://github.com/signup">GitHub の登録ページ</a>を開きます。
+    </li>
+    <li>
+      登録の方法を選びます。
+      <ul>
+        <li><b>Google アカウントで登録する</b>：<span class="ui">Continue with Google</span> を押します。</li>
+        <li><b>メールアドレスで登録する</b>：メールアドレス、パスワード、ユーザー名を入力します。</li>
+      </ul>
+    </li>
+    <li>
+      <b>ユーザー名（Username）</b>を決めます。ユーザー名は投稿に表示され、<b>誰でも見られます</b>。
+      本名や、ほかの SNS と同じ名前を出したくない方は、別の名前にしておくと安心です。使えるのは英数字とハイフン（-）です。
+    </li>
+    <li>
+      ロボットではないことの確認（簡単なパズルなど）が出たら、画面の案内に沿って答えます。
+    </li>
+    <li>
+      登録したメールアドレスに、GitHub から<b>確認コード</b>が届きます。届いたコードを画面に入力します。
+      届かないときは、迷惑メールのフォルダも見てみてください。
+    </li>
+    <li>
+      使い方などの質問画面が出たら、答えても、<span class="ui">Skip</span> などで飛ばしても大丈夫です。
+    </li>
+  </ol>
+  <p class="hint">
+    「This email can't be used」などのエラーが出たときは、別のブラウザで試す、少し時間をおいて試す、別のメールアドレスを使う、といった方法があります。
+    詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/account-management/creating-an-account-on-github">アカウント作成の解説</a>をご覧ください。
+    また、登録後に「2要素認証（2FA）」の設定を勧められます。アカウントを乗っ取られにくくなるので、設定しておくのがおすすめです。
+  </p>
+
+  <h2 id="email">メールアドレスを公開したくない方へ</h2>
+  <p>
+    まず安心してほしいのは、<b>登録したメールアドレスは、初期設定のままでは他の人に表示されない</b>ということです。
+    Discussions に投稿しても、表示されるのはユーザー名とアイコンだけです。
+  </p>
+  <p>さらに念のため、次の設定をしておくとより安心です。</p>
+  <ol class="steps">
+    <li>
+      ログインした状態で、<a href="https://github.com/settings/emails">メールアドレスの設定ページ</a>を開きます
+      （右上のアイコン → <span class="ui">Settings</span> → 左のメニューの <span class="ui">Emails</span> でも開けます）。
+    </li>
+    <li>
+      <span class="ui">Keep my email addresses private</span> にチェックを入れます。
+      同じページの <span class="ui">Block command line pushes that expose my email</span> にもチェックを入れておくと、なお安心です。
+    </li>
+    <li>
+      左のメニューの <span class="ui">Public profile</span> を開き、<span class="ui">Public email</span> が
+      <span class="ui">Don't show my email address</span>（表示しない）になっていることを確認します。
+    </li>
+  </ol>
+  <p class="hint">
+    2番の設定は、主にプログラムを書く人向けのもので、オンにしておくとメールアドレスの代わりに GitHub 専用の匿名のアドレスが使われます。
+    詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address">メールアドレスの設定の解説</a>をご覧ください。
+  </p>
+  <p>
+    それでも普段のメールアドレスを使うのが気になる方は、GitHub 用に<b>新しいメールアドレス</b>（Gmail などの無料のもの）を作って、それで登録する方法もあります。
+  </p>
+
+  <h2 id="post">Discussions に要望を投稿する</h2>
+  <ol class="steps">
+    <li>
+      このサイトの <a href="https://github.com/otocolobuslove/9th-city-site/discussions">Discussions</a> を開きます。ログインしていなければ、ログインします。
+    </li>
+    <li>
+      右上の <span class="ui">New discussion</span> を押します。
+    </li>
+    <li>
+      カテゴリ（投稿の種類）を選びます。迷ったら <span class="ui">Ideas</span> で大丈夫です。
+      <table class="wikitable cat">
+        <thead><tr><th>こんなとき</th><th>選ぶカテゴリ</th></tr></thead>
+        <tbody>
+          <tr><td>内容の訂正・追加・削除をお願いしたい</td><td><span class="ui">Ideas</span></td></tr>
+          <tr><td>サイトについて質問したい</td><td><span class="ui">Q&amp;A</span></td></tr>
+          <tr><td>それ以外（感想など）</td><td><span class="ui">General</span></td></tr>
+        </tbody>
+      </table>
+      <span class="ui">Announcements</span> は運営からのお知らせ用なので、投稿できません。
+    </li>
+    <li>
+      タイトル（<span class="ui">Title</span>）と本文を書いて、<span class="ui">Start discussion</span> を押せば投稿完了です。
+    </li>
+  </ol>
+  <p><a class="button" href="https://github.com/otocolobuslove/9th-city-site/discussions/new?category=ideas">訂正・追加・削除の要望を書く（Ideas）</a></p>
+
+  <h3 id="example">書き方の例</h3>
+  <div class="example">
+    <p><b>タイトル</b>：【訂正】活動歴 9/19 の内容</p>
+    <p><b>本文</b>：</p>
+    <ul>
+      <li>どこを：活動歴の 2026-09-19 の行</li>
+      <li>どう直してほしいか：〇〇を△△に直してほしいです</li>
+      <li>出典：https://www.youtube.com/watch?v=…（〇分ごろ）</li>
+    </ul>
+  </div>
+  <p>
+    このサイトは、公式の配信や X のポストを出典にしています。<b>出典の URL</b>（配信なら話していた時間も）を書いてもらえると、確認して反映しやすくなります。
+  </p>
+
+  <h3 id="manners">投稿するときのお願い</h3>
+  <ul>
+    <li>Discussions は<b>誰でも見られる場所</b>です。本名・住所・連絡先などの個人情報は書かないでください。</li>
+    <li>配信やポストで公開されていない情報や、九日なここさんのご迷惑になりそうな話題は扱いません。</li>
+    <li>ご本人さま・関係者さまからの訂正や削除のご要望は、優先して対応します。</li>
+    <li>個人で運営しているため、お返事や反映に時間がかかることがあります。</li>
+  </ul>
+
+  <h3 id="after">投稿したあと</h3>
+  <ul>
+    <li>返信がつくと、GitHub から登録したメールアドレスにお知らせが届きます。</li>
+    <li>自分の投稿は、投稿の右上の <span class="ui">…</span> から、あとで編集や削除ができます。</li>
+  </ul>
+  <p class="hint">
+    Discussions の使い方は、GitHub 公式の<a href="https://docs.github.com/ja/discussions/collaborating-with-your-community-using-discussions/participating-in-a-discussion">ディスカッションへの参加の解説</a>にもまとまっています。
+  </p>
+
+  <p class="crumb"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
+
+</article>
+</main>
+
+<footer>
+  <p>当サイトは九日なここさんを応援するファンによる非公式サイトです。</p>
+  <p>最終更新：2026-11-12（日付は日本時間）</p>
+</footer>
+
+</body>
+</html>
