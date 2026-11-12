@@ -13,60 +13,69 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="google-site-verification" content="YuzLXvtgHgs77vHk-zX5hnRQj4bFbXazRCyVrIhCTkg">
 <style>
-  /* ===== 配色：雪・氷・冬の夜空 ===== */
+  /* ===== 配色：雪・ミントグリーン ===== */
   :root {
-    --page: #eef3f8;          /* 雪明かりの地 */
+    --page: #edf6f3;          /* 雪明かりの地 */
     --paper: #ffffff;         /* 記事面 */
-    --text: #1d2633;
-    --muted: #5d6b7c;
-    --link: #2a62a6;          /* 氷の青 */
-    --link-visited: #5a4f9c;
-    --night: #17233a;         /* 冬の夜空 */
-    --night-2: #24375a;
-    --frost: #e4edf6;         /* 霜の青 */
-    --frost-2: #f4f8fc;
-    --line: #c9d5e3;
-    --line-soft: #e2e9f1;
+    --text: #1b2a28;
+    --muted: #566b67;
+    --link: #1a7064;          /* ミントグリーン */
+    --link-visited: #5b5a9c;
+    --night: #8fd6c4;         /* ヘッダー */
+    --night-2: #c3ece2;
+    --header-text: #0f3f39;
+    --header-muted: #2c5f57;
+    --header-accent: #1a7064;
+    --frost: #e1f3ee;         /* 淡いミント */
+    --frost-2: #f2faf7;
+    --line: #c2ddd5;
+    --line-soft: #ddeee9;
     --todo: #a14a06;
     --todo-bg: #fff3e2;
     --snow: rgba(255, 255, 255, 0.85);
-    --silhouette: #2f456b;
+    --silhouette: #2a6b62;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --page: #0d1420;
-      --paper: #141d2b;
-      --text: #dfe7f1;
-      --muted: #95a3b5;
-      --link: #8cbcf0;
+      --page: #0b1614;
+      --paper: #12201d;
+      --text: #dcebe7;
+      --muted: #93aaa4;
+      --link: #7fd8c7;
       --link-visited: #b4a8ea;
-      --night: #0a1019;
-      --night-2: #1a2a45;
-      --frost: #1c2a3e;
-      --frost-2: #172234;
-      --line: #2e3e55;
-      --line-soft: #233247;
+      --night: #0f2c27;
+      --night-2: #1d5c53;
+      --header-text: #eafaf6;
+      --header-muted: #a9d3ca;
+      --header-accent: #9fe6d6;
+      --frost: #17302b;
+      --frost-2: #132622;
+      --line: #2a4a43;
+      --line-soft: #203a34;
       --todo: #f2b26b;
       --todo-bg: #3a2814;
-      --silhouette: #6f86a6;
+      --silhouette: #5fa597;
     }
   }
   :root[data-theme="dark"] {
-    --page: #0d1420;
-    --paper: #141d2b;
-    --text: #dfe7f1;
-    --muted: #95a3b5;
-    --link: #8cbcf0;
+    --page: #0b1614;
+    --paper: #12201d;
+    --text: #dcebe7;
+    --muted: #93aaa4;
+    --link: #7fd8c7;
     --link-visited: #b4a8ea;
-    --night: #0a1019;
-    --night-2: #1a2a45;
-    --frost: #1c2a3e;
-    --frost-2: #172234;
-    --line: #2e3e55;
-    --line-soft: #233247;
+    --night: #0f2c27;
+    --night-2: #1d5c53;
+    --header-text: #eafaf6;
+    --header-muted: #a9d3ca;
+    --header-accent: #9fe6d6;
+    --frost: #17302b;
+    --frost-2: #132622;
+    --line: #2a4a43;
+    --line-soft: #203a34;
     --todo: #f2b26b;
     --todo-bg: #3a2814;
-    --silhouette: #6f86a6;
+    --silhouette: #5fa597;
   }
 
   * { box-sizing: border-box; }
@@ -87,7 +96,7 @@
   .site-header {
     position: relative;
     overflow: hidden;
-    color: #fff;
+    color: var(--header-text);
     background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
   }
   .site-header::before,
@@ -134,8 +143,8 @@
     font-size: 1.05rem;
     letter-spacing: 0.08em;
   }
-  .site-name::before { content: "❄ "; color: #bcd8f5; }
-  .site-tag { font-size: 0.8rem; color: #b8c7da; }
+  .site-name::before { content: "❄ "; color: var(--header-accent); }
+  .site-tag { font-size: 0.8rem; color: var(--header-muted); }
   /* 雪の積もった縁 */
   .site-header .drift {
     position: relative;
@@ -231,7 +240,7 @@
     padding: 0.55rem 0.5rem;
     font-weight: 700;
     font-size: 1.05rem;
-    color: #fff;
+    color: var(--header-text);
     background: linear-gradient(180deg, var(--night-2), var(--night));
     border: 1px solid var(--line);
     border-bottom: none;
@@ -240,7 +249,7 @@
     display: block;
     font-weight: 400;
     font-size: 0.75rem;
-    color: #c5d4e6;
+    color: var(--header-muted);
   }
   .infobox .image-cell {
     text-align: center;
@@ -493,9 +502,12 @@
     <li>苗字の「九日」は、旭川の「旭」の字を「九」と「日」に分解したもの<sup class="ref"><a href="#note-15">[15]</a></sup>。名前の「なここ」は、誕生日の7月9日（「な」ながつ「ここ」のか）と語呂の良さから付けられた<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
     <li>性別は女性（いわゆる「<a href="https://ja.wikipedia.org/wiki/%E3%83%90%E7%BE%8E%E8%82%89">バ美肉</a>」ではない）<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
     <li>年齢は20代<sup class="ref"><a href="#note-5">[5]</a></sup>。お酒の紹介動画<sup class="ref"><a href="#note-8">[8]</a></sup>を合法的に投稿するため、具体的な年齢は非公表としつつ、一定の情報を開示している。</li>
-    <li>朝型<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
+    <li>身長は普通<sup class="ref"><a href="#note-5">[5]</a></sup>。</li>
+    <li>朝型<sup class="ref"><a href="#note-17">[17]</a></sup>。Xの投稿も朝が大半で、内容は挨拶と一言。冬は旭川が寒いという話が多い。イベントや思うことがあった場合は、夜にも投稿することがある。日中や深夜帯に投稿されることはほとんどない。</li>
     <li>ゲームはするが、画面酔いするため1時間続けて遊ぶことはできず、本人いわく下手だという。そのため、ゲーム配信の予定はないとのこと。</li>
     <li>一人で行動することに抵抗がなく、一人カフェや一人焼肉もする。ただ、映画はこれまで友人などと観ていたため、いわゆる「一人映画」はしたことがなかった。2026年の夏、以前から興味のあった『パプリカ』を一緒に観に行く友人が思いつかず、初めて一人映画に挑戦した。</li>
+    <li>料理はしないことはないが苦手。そのため、（3次元の）手元を映す料理配信には否定的。話が逸れるが、なぜかかぼちゃの話が多い<sup class="ref"><a href="#note-22">[22]</a></sup>。</li>
+    <li>いわゆる「中の人」のことを、自身で「超美麗3D（モデル）」と呼んでいる。Xにはときどき、何かを持った手元を写した画像を投稿している。ネイルが特徴で、なここの瞳と同じく、ミントグリーンに雪の結晶をあしらったデザインになっている。</li>
   </ul>
 
   <h3 id="visual">ビジュアル</h3>
@@ -511,6 +523,7 @@
       </ol>
     </li>
     <li>造形（④・⑤）や苗字の「九日」、ロゴ（「なここ」の最後の「こ」の字に狐耳と尻尾が付いている）から、明らかに<a href="https://ja.wikipedia.org/wiki/%E4%B9%9D%E5%B0%BE%E3%81%AE%E7%8B%90">九尾の狐</a>を思わせるが、本人は九尾の狐であることを否定している<sup class="ref"><a href="#note-21">[21]</a></sup>。自称はあくまで一般市民であり、お団子髪はお団子髪、尻尾のような飾りはあくまで飾りである。</li>
+    <li>2Dモデルで動かせるのは、2026年秋時点で顔と全身の左右の動き程度で、腕は動かせない。また、現状では衣装の差分もない<sup class="ref"><a href="#note-22">[22]</a></sup>。</li>
   </ul>
 
   <h3 id="favorites">好きなもの</h3>
@@ -525,9 +538,10 @@
     <li>お酒<sup class="ref"><a href="#note-8">[8]</a></sup>。</li>
     <li>おしゃべり。4時間ひとりで話し続けて、温厚な祖父を怒らせたことがあるほど<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
     <li>美術。特に浮世絵<sup class="ref"><a href="#note-18">[18]</a></sup>とフィンセント・ファン・ゴッホ<sup class="ref"><a href="#note-17">[17]</a></sup>。北海道立旭川美術館の特別展「大広重展―東海道五拾三次と雪月花 叙情の世界」と、関連の講座に足を運んだ<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
-    <li>近代史。「旭川市関係ないけど」としつつ、坂本龍馬をテーマに配信するほど<sup class="ref"><a href="#note-23">[23]</a></sup>。</li>
+    <li>近代史。「旭川市関係ないけど」としつつ、坂本龍馬をテーマに配信するほど<sup class="ref"><a href="#note-23">[23]</a></sup>。なお、近代史ではないものの、いわゆる忠臣蔵も好き<sup class="ref"><a href="#note-20">[20]</a></sup>。</li>
     <li>リアルアキバボーイズ（RAB）。特にネスで、名前は明言していないが「チェック柄のシャツで踊るグループの白シャツ担当」が好きだと話している<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
-    <li>歌うこと。本人は上手くないとしつつも好きで<sup class="ref"><a href="#note-10">[10]</a></sup>、料理中にずっと歌っていることもある。</li>
+    <li>歌うこと。本人は上手くないとしつつも好きで<sup class="ref"><a href="#note-10">[10]</a></sup>、料理中にずっと歌っていることもある。配信でも隙あらば歌ったりする<sup class="ref"><a href="#note-20">[20]</a></sup>。</li>
+    <li>こども。本人にこどもは（まだ）いないが、よく他人の家の赤ちゃんの動画を見て癒されている。ただし、本人いわく、ロリコンではない（迫真）<sup class="ref"><a href="#note-22">[22]</a></sup>。</li>
     <li>好きなアーティストは、40mP<sup class="ref"><a href="#note-10">[10]</a></sup>、Mrs. GREEN APPLE<sup class="ref"><a href="#note-15">[15]</a></sup>、DREAMS COME TRUE<sup class="ref"><a href="#note-18">[18]</a></sup>、平沢進。</li>
   </ul>
 
@@ -538,7 +552,7 @@
     <li>1回の配信は1時間程度。本人いわく、本当はもっと話せるが、市民（リスナー）の負担を考えて切り上げているという。配信を切り上げる際はいつも名残惜しそうにして体を左右に揺らしている（誤って配信停止ボタンを押し、すぐに配信が終わってしまった回もある）。</li>
     <li>告知はX（旧Twitter）の<a href="https://x.com/9thnakoko">@9thnakoko</a>で行うとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
     <li>配信後は、Xで感想を募集している（配信タグ「#きょうは九日」の使用を推奨）。</li>
-    <li><a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">マシュマロ</a>のアカウントがあり、投稿された内容を配信で紹介している。初配信の前にアカウントを開設してXでお祝いのコメントを募り、初配信ではそれまでに届いた3件を紹介した<sup class="ref"><a href="#note-15">[15]</a></sup>。ただ、その後しばらくは使われなかった。Xの固定ポストやプロフィールにリンクを（貼ると言いつつ）貼っていなかったため、初配信以降に加わった市民はその存在にすら気づかなかった（本人も忘れていたのではないかという疑惑もある）。10月19日の配信から、マシュマロの紹介を再開している<sup class="ref"><a href="#note-21">[21]</a></sup>。</li>
+    <li><a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">マシュマロ</a>のアカウントがあり、投稿された内容を配信で紹介している。初配信の前にアカウントを開設してXでお祝いのコメントを募り、初配信ではそれまでに届いた3件を紹介した<sup class="ref"><a href="#note-15">[15]</a></sup>。ただ、その後しばらくは使われなかった。Xの固定ポストやプロフィールにリンクを（貼ると言いつつ）貼っていなかったため、初配信以降に加わった市民はその存在にすら気づかなかった（本人も忘れていたのではないかという疑惑もある）。2026年秋現在は、（宣言どおり）固定ポストのリプライにリンクが貼られ、10月19日の配信から、マシュマロの紹介も再開している<sup class="ref"><a href="#note-21">[21]</a></sup>。マシュマロでお願いをすると、ある程度の無茶振りにも答えてくれる<sup class="ref"><a href="#note-21">[21]</a></sup>。</li>
     <li>配信での九日なここのお決まりの挨拶は、2026年秋の時点では特にない。市民から本人への挨拶は、配信の開始時は「コンなここー」、終了時は「おつなここー」が定番になっている。一度、定型の挨拶や自己紹介文を決めようとしたことがあるが……<sup class="ref"><a href="#note-21">[21]</a></sup></li>
     <li>配信用の隠しコマンド（本人談）がある。コメント欄に「ここのかー！」と投稿すると……</li>
   </ul>

@@ -11,60 +11,69 @@
 <link rel="canonical" href="https://otocolobuslove.github.io/9th-city-site/request.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
-  /* ===== 配色：雪・氷・冬の夜空 ===== */
+  /* ===== 配色：雪・ミントグリーン ===== */
   :root {
-    --page: #eef3f8;          /* 雪明かりの地 */
+    --page: #edf6f3;          /* 雪明かりの地 */
     --paper: #ffffff;         /* 記事面 */
-    --text: #1d2633;
-    --muted: #5d6b7c;
-    --link: #2a62a6;          /* 氷の青 */
-    --link-visited: #5a4f9c;
-    --night: #17233a;         /* 冬の夜空 */
-    --night-2: #24375a;
-    --frost: #e4edf6;         /* 霜の青 */
-    --frost-2: #f4f8fc;
-    --line: #c9d5e3;
-    --line-soft: #e2e9f1;
+    --text: #1b2a28;
+    --muted: #566b67;
+    --link: #1a7064;          /* ミントグリーン */
+    --link-visited: #5b5a9c;
+    --night: #8fd6c4;         /* ヘッダー */
+    --night-2: #c3ece2;
+    --header-text: #0f3f39;
+    --header-muted: #2c5f57;
+    --header-accent: #1a7064;
+    --frost: #e1f3ee;         /* 淡いミント */
+    --frost-2: #f2faf7;
+    --line: #c2ddd5;
+    --line-soft: #ddeee9;
     --todo: #a14a06;
     --todo-bg: #fff3e2;
     --snow: rgba(255, 255, 255, 0.85);
-    --silhouette: #2f456b;
+    --silhouette: #2a6b62;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --page: #0d1420;
-      --paper: #141d2b;
-      --text: #dfe7f1;
-      --muted: #95a3b5;
-      --link: #8cbcf0;
+      --page: #0b1614;
+      --paper: #12201d;
+      --text: #dcebe7;
+      --muted: #93aaa4;
+      --link: #7fd8c7;
       --link-visited: #b4a8ea;
-      --night: #0a1019;
-      --night-2: #1a2a45;
-      --frost: #1c2a3e;
-      --frost-2: #172234;
-      --line: #2e3e55;
-      --line-soft: #233247;
+      --night: #0f2c27;
+      --night-2: #1d5c53;
+      --header-text: #eafaf6;
+      --header-muted: #a9d3ca;
+      --header-accent: #9fe6d6;
+      --frost: #17302b;
+      --frost-2: #132622;
+      --line: #2a4a43;
+      --line-soft: #203a34;
       --todo: #f2b26b;
       --todo-bg: #3a2814;
-      --silhouette: #6f86a6;
+      --silhouette: #5fa597;
     }
   }
   :root[data-theme="dark"] {
-    --page: #0d1420;
-    --paper: #141d2b;
-    --text: #dfe7f1;
-    --muted: #95a3b5;
-    --link: #8cbcf0;
+    --page: #0b1614;
+    --paper: #12201d;
+    --text: #dcebe7;
+    --muted: #93aaa4;
+    --link: #7fd8c7;
     --link-visited: #b4a8ea;
-    --night: #0a1019;
-    --night-2: #1a2a45;
-    --frost: #1c2a3e;
-    --frost-2: #172234;
-    --line: #2e3e55;
-    --line-soft: #233247;
+    --night: #0f2c27;
+    --night-2: #1d5c53;
+    --header-text: #eafaf6;
+    --header-muted: #a9d3ca;
+    --header-accent: #9fe6d6;
+    --frost: #17302b;
+    --frost-2: #132622;
+    --line: #2a4a43;
+    --line-soft: #203a34;
     --todo: #f2b26b;
     --todo-bg: #3a2814;
-    --silhouette: #6f86a6;
+    --silhouette: #5fa597;
   }
 
   * { box-sizing: border-box; }
@@ -85,7 +94,7 @@
   .site-header {
     position: relative;
     overflow: hidden;
-    color: #fff;
+    color: var(--header-text);
     background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
   }
   .site-header::before,
@@ -132,8 +141,8 @@
     font-size: 1.05rem;
     letter-spacing: 0.08em;
   }
-  .site-name::before { content: "❄ "; color: #bcd8f5; }
-  .site-tag { font-size: 0.8rem; color: #b8c7da; }
+  .site-name::before { content: "❄ "; color: var(--header-accent); }
+  .site-tag { font-size: 0.8rem; color: var(--header-muted); }
   /* 雪の積もった縁 */
   .site-header .drift {
     position: relative;
@@ -229,7 +238,7 @@
     padding: 0.55rem 0.5rem;
     font-weight: 700;
     font-size: 1.05rem;
-    color: #fff;
+    color: var(--header-text);
     background: linear-gradient(180deg, var(--night-2), var(--night));
     border: 1px solid var(--line);
     border-bottom: none;
@@ -238,7 +247,7 @@
     display: block;
     font-weight: 400;
     font-size: 0.75rem;
-    color: #c5d4e6;
+    color: var(--header-muted);
   }
   .infobox .image-cell {
     text-align: center;
