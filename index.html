@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>北海道九日市報～九日なここ だより～</title>
+<title>北海道九日市報 ～ 九日なここ だより ～</title>
 <meta name="description" content="旭川市非公式Vtuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
-<meta property="og:title" content="北海道九日市報～九日なここ だより～">
+<meta property="og:title" content="北海道九日市報 ～ 九日なここ だより ～">
 <meta property="og:description" content="旭川市非公式Vtuber・九日なここさんの活動履歴をまとめたファンによる非公式サイトです。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://otocolobuslove.github.io/9th-city-site/">
 <link rel="canonical" href="https://otocolobuslove.github.io/9th-city-site/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="google-site-verification" content="YuzLXvtgHgs77vHk-zX5hnRQj4bFbXazRCyVrIhCTkg">
 <style>
   /* ===== 配色：雪・氷・冬の夜空 ===== */
@@ -312,8 +313,10 @@
     text-align: center;
     margin-bottom: 0.25rem;
   }
-  .toc ol { margin: 0; padding-left: 1.6rem; }
-  .toc li { margin: 0.1rem 0; }
+  .toc ol { margin: 0; padding-left: 0; list-style: none; counter-reset: toc; }
+  .toc ol ol { padding-left: 1.2em; }
+  .toc li { margin: 0.1rem 0; counter-increment: toc; }
+  .toc li::before { content: counters(toc, ".") ". "; color: var(--muted); }
 
   /* ===== 表（wikitable） ===== */
   .wikitable {
@@ -401,7 +404,7 @@
 
 <header class="site-header">
   <div class="inner">
-    <span class="site-name">北海道九日市報～九日なここ だより～</span>
+    <span class="site-name">北海道九日市報 ～ 九日なここ だより ～</span>
     <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式まとめサイト</span>
   </div>
   <div class="drift" aria-hidden="true"></div>
@@ -421,7 +424,7 @@
     <caption>九日なここ<small>ここのか なここ</small></caption>
     <tr><td class="image-cell" colspan="2">
       <figure class="silhouette">
-        <svg viewBox="0 0 240 200" role="img" aria-label="人型のシルエット（仮画像）">
+        <svg viewBox="0 0 240 200" role="img" aria-label="本人イメージ（耳のある頭の上半分のシルエット）">
           <defs>
             <linearGradient id="sil-sky" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" class="sky-top"/>
@@ -437,20 +440,18 @@
             <circle cx="16" cy="170" r="1.8"/><circle cx="226" cy="168" r="1.6"/>
           </g>
           <g class="figure">
-            <circle cx="97" cy="50" r="12"/>
-            <circle cx="143" cy="50" r="12"/>
-            <circle cx="120" cy="74" r="30"/>
-            <path d="M120 112c-38 0-62 22-66 60l-2 28h136l-2-28c-4-38-28-60-66-60z"/>
+            <circle cx="72" cy="136" r="24"/>
+            <circle cx="168" cy="136" r="24"/>
+            <circle cx="120" cy="186" r="62"/>
           </g>
           <path class="ground" d="M0 186c30-8 60-8 90-2s70 6 100-2 40-4 50-1V200H0z"/>
         </svg>
-        <figcaption>仮画像</figcaption>
+        <figcaption>本人イメージ</figcaption>
       </figure>
     </td></tr>
     <tr class="group"><th colspan="2">基本情報</th></tr>
     <tr><th>肩書き</th><td>旭川市非公式Vtuber<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
     <tr><th>出身</th><td>北海道旭川市<sup class="ref"><a href="#note-1">[1]</a></sup></td></tr>
-    <tr><th>活動開始</th><td>2026年6月9日（初動画）<sup class="ref"><a href="#note-4">[4]</a></sup></td></tr>
     <tr><th>アカウント開設</th><td>YouTube：2026年4月9日<sup class="ref"><a href="#note-2">[2]</a></sup><br>X：2026年4月（初投稿は4月10日）<sup class="ref"><a href="#note-3">[3]</a></sup></td></tr>
     <tr><th>初配信</th><td>2026年7月9日<sup class="ref"><a href="#note-15">[15]</a></sup></td></tr>
     <tr><th>誕生日</th><td>7月9日</td></tr>
@@ -464,16 +465,13 @@
     <tr><th>配信</th><td>#きょうは九日</td></tr>
     <tr><th>ファンアート</th><td>#市立九日美術館</td></tr>
     <tr><th>ファンネーム</th><td>#九日市民</td></tr>
-    <tr class="group"><th colspan="2">公式</th></tr>
-    <tr><th>YouTube</th><td><a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93">@9th.nakoko九日なここ</a></td></tr>
-    <tr><th>X</th><td><a href="https://x.com/9thnakoko">@9thnakoko</a></td></tr>
   </table>
 
   <p id="overview">
     <b>九日なここ</b>（ここのか なここ）は、北海道旭川市を拠点に活動する「旭川市非公式」のVTuber。
     旭川出身で、旭川のための情報発信を活動目的として掲げている<sup class="ref" id="cite-1"><a href="#note-1">[1]</a></sup>。
     2026年4月9日にYouTubeチャンネルを開設し<sup class="ref"><a href="#note-2">[2]</a></sup>、翌10日にXで初投稿した<sup class="ref"><a href="#note-3">[3]</a></sup>。6月9日からYouTubeで動画の投稿を始め<sup class="ref"><a href="#note-4">[4]</a></sup>、
-    同年7月9日に初配信を行った<sup class="ref"><a href="#note-15">[15]</a></sup>。
+    同年7月9日に初配信を行っている<sup class="ref"><a href="#note-15">[15]</a></sup>。
   </p>
 
   <nav class="toc" aria-label="目次">
@@ -493,10 +491,10 @@
   <ul>
     <li>一人称は「なここ」。</li>
     <li>苗字の「九日」は、旭川の「旭」の字を「九」と「日」に分解したもの<sup class="ref"><a href="#note-15">[15]</a></sup>。名前の「なここ」は、誕生日の7月9日（「な」ながつ「ここ」のか）と語呂の良さから付けられた<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
-    <li>性別は女性で、いわゆる「<a href="https://ja.wikipedia.org/wiki/%E3%83%90%E7%BE%8E%E8%82%89">バ美肉</a>」ではない<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+    <li>性別は女性（いわゆる「<a href="https://ja.wikipedia.org/wiki/%E3%83%90%E7%BE%8E%E8%82%89">バ美肉</a>」ではない）<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
     <li>年齢は20代<sup class="ref"><a href="#note-5">[5]</a></sup>。お酒の紹介動画<sup class="ref"><a href="#note-8">[8]</a></sup>を合法的に投稿するため、具体的な年齢は非公表としつつ、一定の情報を開示している。</li>
     <li>朝型<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
-    <li>ゲームはするが、画面酔いするため1時間続けて遊ぶことはできず、本人いわく下手だという。</li>
+    <li>ゲームはするが、画面酔いするため1時間続けて遊ぶことはできず、本人いわく下手だという。そのため、ゲーム配信の予定はないとのこと。</li>
   </ul>
 
   <h3 id="visual">ビジュアル</h3>
@@ -505,7 +503,7 @@
     <li>イラストの特徴は、自己紹介動画や初配信などで語られている<sup class="ref"><a href="#note-5">[5]</a></sup><sup class="ref"><a href="#note-12">[12]</a></sup><sup class="ref"><a href="#note-15">[15]</a></sup>。特に①と②が本人のこだわり。
       <ol class="features">
         <li>①雪の結晶の影が入った瞳</li>
-        <li>②衣装（スカートやジャケット）の裾にあしらった<a href="https://ja.wikipedia.org/wiki/%E6%97%AD%E6%A9%8B_(%E6%97%AD%E5%B7%9D%E5%B8%82)">旭橋</a></li>
+        <li>②衣装（スカートやジャケットの裾など）にあしらった<a href="https://ja.wikipedia.org/wiki/%E6%97%AD%E6%A9%8B_(%E6%97%AD%E5%B7%9D%E5%B8%82)">旭橋</a></li>
         <li>③旭川市の木である<a href="https://ja.wikipedia.org/wiki/%E3%83%8A%E3%83%8A%E3%82%AB%E3%83%9E%E3%83%89">ナナカマド</a>の実をモチーフにしたボタン・カフス</li>
         <li>④狐の耳に当たる位置にあるお団子髪</li>
         <li>⑤尻尾のような9本の大きな飾り</li>
@@ -525,7 +523,7 @@
     </li>
     <li>お酒<sup class="ref"><a href="#note-8">[8]</a></sup>。</li>
     <li>おしゃべり。4時間ひとりで話し続けて、温厚な祖父を怒らせたことがあるほど<sup class="ref"><a href="#note-17">[17]</a></sup>。</li>
-    <li>美術。特に歌川広重<sup class="ref"><a href="#note-18">[18]</a></sup>とフィンセント・ファン・ゴッホ<sup class="ref"><a href="#note-17">[17]</a></sup>。北海道立旭川美術館の特別展「大広重展―東海道五拾三次と雪月花 叙情の世界」と、関連の講座に足を運んだ<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
+    <li>美術。特に浮世絵<sup class="ref"><a href="#note-18">[18]</a></sup>とフィンセント・ファン・ゴッホ<sup class="ref"><a href="#note-17">[17]</a></sup>。北海道立旭川美術館の特別展「大広重展―東海道五拾三次と雪月花 叙情の世界」と、関連の講座に足を運んだ<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
     <li>近代史。「旭川市関係ないけど」としつつ、坂本龍馬をテーマに配信するほど<sup class="ref"><a href="#note-23">[23]</a></sup>。</li>
     <li>リアルアキバボーイズ（RAB）。特にネスで、名前は明言していないが「チェック柄のシャツで踊るグループの白シャツ担当」が好きだと話している<sup class="ref"><a href="#note-18">[18]</a></sup>。</li>
     <li>歌うこと。本人は上手くないとしつつも好きで<sup class="ref"><a href="#note-10">[10]</a></sup>、料理中にずっと歌っていることもある。</li>
@@ -536,10 +534,10 @@
   <ul>
     <li>チャンネルの紹介文では、旭川の話題を届けて「みーんなまとめて市民にしちゃいます」と述べており<sup class="ref"><a href="#note-1">[1]</a></sup>、動画や配信を見てくれる人をみんな「九日市民」と呼ぶ、としている<sup class="ref"><a href="#note-15">[15]</a></sup>。</li>
     <li>動画は不定期更新<sup class="ref"><a href="#note-1">[1]</a></sup>。配信は「9」のつく日の午後7時9分か午後9時9分に始まる<sup class="ref"><a href="#note-15">[15]</a></sup><sup class="ref"><a href="#note-16">[16]</a></sup><sup class="ref"><a href="#note-17">[17]</a></sup>（2026年8月以降は午後9時9分が主流<sup class="ref"><a href="#note-17">[17]</a></sup><sup class="ref"><a href="#note-23">[23]</a></sup>）。</li>
-    <li>1回の配信は1時間程度。本人いわく、本当はもっと話せるが、市民（リスナー）の負担を考えて切り上げているという。配信を切り上げる際はいつも名残惜しそうに体を左右に揺らしている（誤って配信停止ボタンを押し、すぐに配信が終わってしまった回もある）。</li>
+    <li>1回の配信は1時間程度。本人いわく、本当はもっと話せるが、市民（リスナー）の負担を考えて切り上げているという。配信を切り上げる際はいつも名残惜しそうにして体を左右に揺らしている（誤って配信停止ボタンを押し、すぐに配信が終わってしまった回もある）。</li>
     <li>告知はX（旧Twitter）の<a href="https://x.com/9thnakoko">@9thnakoko</a>で行うとしている<sup class="ref"><a href="#note-1">[1]</a></sup>。</li>
-    <li>配信の終了後は、Xで感想を募集している（配信タグ「#きょうは九日」の使用を推奨）。</li>
-    <li>初配信の前に<a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">マシュマロ</a>のアカウントを開設し、Xでお祝いのコメントを募った。初配信ではそれまでに届いた3件を紹介した<sup class="ref"><a href="#note-15">[15]</a></sup>が、以降の配信ではしばらく使われなかった。Xの固定ポストやプロフィールにリンクを貼ると言いつつ貼っていなかったため、初配信以降に加わった市民はその存在に気づかなかった（本人も忘れていたのではないかという疑惑もある）。</li>
+    <li>配信後は、Xで感想を募集している（配信タグ「#きょうは九日」の使用を推奨）。</li>
+    <li>初配信の前に<a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">マシュマロ</a>のアカウントを開設し、Xでお祝いのコメントを募った。初配信ではそれまでに届いた3件を紹介した<sup class="ref"><a href="#note-15">[15]</a></sup>が、以降の配信ではしばらく使われなかった。Xの固定ポストやプロフィールにリンクを（貼ると言いつつ）貼っていなかったため、初配信以降に加わった市民はその存在にすら気づかなかった（本人も忘れていたのではないかという疑惑もある）。その後、10月19日の配信からマシュマロの紹介を再開している<sup class="ref"><a href="#note-21">[21]</a></sup>。</li>
     <li>配信での九日なここのお決まりの挨拶は、2026年秋の時点では特にない。市民から本人への挨拶は、配信の開始時は「コンなここー」、終了時は「おつなここー」が定番になっている。一度、定型の挨拶や自己紹介文を決めようとしたことがあるが……<sup class="ref"><a href="#note-21">[21]</a></sup></li>
     <li>配信用の隠しコマンド（本人談）がある。コメント欄に「ここのかー！」と投稿すると……</li>
   </ul>
@@ -581,7 +579,7 @@
       </tr>
       <tr>
         <td class="date">2026-08-19</td>
-        <td>自由研究期間明けの配信。休止中は読書（小川洋子『博士の愛した数式』）とゲーム（Nintendo Switch『Sky 星を紡ぐ子どもたち』）をしていたと話し、再び1か月の配信休止を宣言。<sup class="ref" id="cite-17"><a href="#note-17">[17]</a></sup></td>
+        <td>自由研究期間明けの配信。休止中は読書（小川洋子『博士の愛した数式』）とゲーム（Nintendo Switch『Sky 星を紡ぐ子どもたち』）をしていたと話し、再び1か月の配信休止（自由研究期間延長）を宣言。<sup class="ref" id="cite-17"><a href="#note-17">[17]</a></sup></td>
       </tr>
       <tr>
         <td class="date">2026-09-19</td>
@@ -595,6 +593,7 @@
   <ul>
     <li>YouTube：<a href="https://www.youtube.com/@9th.nakoko%E4%B9%9D%E6%97%A5%E3%81%AA%E3%81%93%E3%81%93">九日なここ@旭川市非公式Vtuber</a></li>
     <li>X：<a href="https://x.com/9thnakoko">九日なここ@旭川非公式Vtuber（@9thnakoko）</a></li>
+    <li>マシュマロ：<a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">九日なここのマシュマロ</a></li>
   </ul>
 
   <h2 id="notes">脚注</h2>
