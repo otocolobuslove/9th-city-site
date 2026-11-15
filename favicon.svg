@@ -15,9 +15,12 @@
       <circle cx="6" cy="30" r="1.2"/>
     </g>
     <g fill="#2a6b62">
-      <circle cx="16" cy="37" r="8.5"/>
-      <circle cx="48" cy="37" r="8.5"/>
-      <circle cx="32" cy="56" r="22"/>
+      <circle cx="16" cy="38" r="8.5"/>
+      <circle cx="14.2" cy="33" r="6.4"/>
+      <circle cx="48" cy="38" r="8.5"/>
+      <circle cx="49.8" cy="33" r="6.4"/>
+      <circle cx="27" cy="56" r="20"/>
+      <circle cx="37" cy="56" r="20"/>
     </g>
     <path d="M0 57c10-3 20-3 30-1s22 2 34-1V64H0z" fill="#ffffff"/>
   </g>
