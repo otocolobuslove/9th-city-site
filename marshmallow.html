@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マシュマロ対応表 | 北海道九日市報 ～ 九日なここ だより ～</title>
+<meta name="description" content="九日なここさんが配信で紹介したマシュマロ（質問・お願い）と、その対応をまとめた一覧です。">
+<meta property="og:title" content="マシュマロ対応表 | 北海道九日市報 ～ 九日なここ だより ～">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://otocolobuslove.github.io/9th-city-site/marshmallow.html">
+<link rel="canonical" href="https://otocolobuslove.github.io/9th-city-site/marshmallow.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  /* ===== 配色：雪・ミントグリーン ===== */
+  :root {
+    --page: #edf6f3;          /* 雪明かりの地 */
+    --paper: #ffffff;         /* 記事面 */
+    --text: #1b2a28;
+    --muted: #566b67;
+    --link: #1a7064;          /* ミントグリーン */
+    --link-visited: #5b5a9c;
+    --night: #8fd6c4;         /* ヘッダー */
+    --night-2: #c3ece2;
+    --header-text: #0f3f39;
+    --header-muted: #2c5f57;
+    --header-accent: #1a7064;
+    --frost: #e1f3ee;         /* 淡いミント */
+    --frost-2: #f2faf7;
+    --line: #c2ddd5;
+    --line-soft: #ddeee9;
+    --todo: #a14a06;
+    --todo-bg: #fff3e2;
+    --snow: rgba(255, 255, 255, 0.85);
+    --silhouette: #2a6b62;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0b1614;
+      --paper: #12201d;
+      --text: #dcebe7;
+      --muted: #93aaa4;
+      --link: #7fd8c7;
+      --link-visited: #b4a8ea;
+      --night: #0f2c27;
+      --night-2: #1d5c53;
+      --header-text: #eafaf6;
+      --header-muted: #a9d3ca;
+      --header-accent: #9fe6d6;
+      --frost: #17302b;
+      --frost-2: #132622;
+      --line: #2a4a43;
+      --line-soft: #203a34;
+      --todo: #f2b26b;
+      --todo-bg: #3a2814;
+      --silhouette: #5fa597;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0b1614;
+    --paper: #12201d;
+    --text: #dcebe7;
+    --muted: #93aaa4;
+    --link: #7fd8c7;
+    --link-visited: #b4a8ea;
+    --night: #0f2c27;
+    --night-2: #1d5c53;
+    --header-text: #eafaf6;
+    --header-muted: #a9d3ca;
+    --header-accent: #9fe6d6;
+    --frost: #17302b;
+    --frost-2: #132622;
+    --line: #2a4a43;
+    --line-soft: #203a34;
+    --todo: #f2b26b;
+    --todo-bg: #3a2814;
+    --silhouette: #5fa597;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text);
+    background: var(--page);
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:visited { color: var(--link-visited); }
+
+  /* ===== サイトヘッダー（夜空＋雪） ===== */
+  .site-header {
+    position: relative;
+    overflow: hidden;
+    color: var(--header-text);
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+  }
+  .site-header::before,
+  .site-header::after {
+    content: "";
+    position: absolute;
+    inset: -200px 0 0 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, var(--snow), transparent),
+      radial-gradient(1.5px 1.5px at 80px 120px, var(--snow), transparent),
+      radial-gradient(2.5px 2.5px at 150px 60px, var(--snow), transparent),
+      radial-gradient(1.5px 1.5px at 210px 160px, var(--snow), transparent),
+      radial-gradient(2px 2px at 260px 20px, var(--snow), transparent),
+      radial-gradient(1px 1px at 120px 180px, var(--snow), transparent);
+    background-size: 300px 200px;
+    animation: snowfall 14s linear infinite;
+  }
+  .site-header::after {
+    background-size: 220px 170px;
+    opacity: 0.55;
+    animation-duration: 22s;
+  }
+  @keyframes snowfall {
+    from { transform: translateY(0); }
+    to   { transform: translateY(200px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header::before, .site-header::after { animation: none; }
+  }
+  .site-header .inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0.9rem 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+    flex-wrap: wrap;
+  }
+  .site-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+  }
+  .site-name::before { content: "❄ "; color: var(--header-accent); }
+  .site-tag { font-size: 0.8rem; color: var(--header-muted); }
+  /* 雪の積もった縁 */
+  .site-header .drift {
+    position: relative;
+    z-index: 1;
+    height: 10px;
+    background:
+      radial-gradient(14px 10px at 14px 0, var(--page) 98%, transparent) 0 100% / 28px 10px repeat-x;
+    transform: translateY(1px);
+  }
+
+  .notice {
+    max-width: 1080px;
+    margin: 0.75rem auto 0;
+    padding: 0 16px;
+  }
+  .notice p {
+    margin: 0;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: var(--frost-2);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--link);
+  }
+
+  /* ===== 記事 ===== */
+  main {
+    max-width: 1080px;
+    margin: 0.75rem auto 0;
+    padding: 0 16px;
+  }
+  article {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 1.5rem 2rem 2rem;
+  }
+  article::after { content: ""; display: block; clear: both; }
+
+  .title {
+    margin: 0;
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.4;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.25rem;
+  }
+  .subtitle {
+    margin: 0.3rem 0 1.25rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  h2 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden; /* 下線をインフォボックスの手前で止める */
+  }
+  h2::before {
+    content: "❅";
+    font-size: 0.85em;
+    color: var(--link);
+    margin-right: 0.4em;
+    opacity: 0.7;
+  }
+  h3::before {
+    content: "🦊";
+    font-size: 0.85em;
+    margin-right: 0.4em;
+  }
+  h3 {
+    font-family: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 1.25rem 0 0.4rem;
+  }
+  li > ul { margin: 0.1rem 0 0.2rem; }
+  ol.features { margin: 0.1rem 0 0.2rem; padding-left: 0.4em; list-style: none; }
+  p { margin: 0.6rem 0; }
+
+  /* ===== インフォボックス ===== */
+  .infobox {
+    float: right;
+    width: 290px;
+    margin: 0 0 1rem 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--frost-2);
+    font-size: 0.86rem;
+    line-height: 1.6;
+    border-collapse: collapse;
+  }
+  .infobox caption {
+    caption-side: top;
+    padding: 0.55rem 0.5rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--header-text);
+    background: linear-gradient(180deg, var(--night-2), var(--night));
+    border: 1px solid var(--line);
+    border-bottom: none;
+  }
+  .infobox caption small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--header-muted);
+  }
+  .infobox .image-cell {
+    text-align: center;
+    padding: 0.75rem;
+  }
+  .silhouette {
+    margin: 0;
+  }
+  .silhouette svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+  }
+  .silhouette .sky-top    { stop-color: var(--frost); }
+  .silhouette .sky-bottom { stop-color: var(--paper); }
+  .silhouette .snow       { fill: var(--link); opacity: 0.25; }
+  .silhouette .figure     { fill: var(--silhouette); }
+  .silhouette .ground     { fill: var(--paper); stroke: var(--line); }
+  .silhouette figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .infobox th, .infobox td {
+    padding: 0.35rem 0.6rem;
+    border-top: 1px solid var(--line-soft);
+    text-align: left;
+    vertical-align: top;
+  }
+  .infobox th {
+    width: 38%;
+    background: var(--frost);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .infobox th small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    white-space: normal;
+    color: var(--muted);
+  }
+  .infobox td small.note {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .infobox .group th {
+    text-align: center;
+    background: var(--frost);
+    color: var(--link);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== 目次 ===== */
+  .toc {
+    display: inline-block;
+    min-width: 220px;
+    margin: 0.75rem 0 0.5rem;
+    padding: 0.6rem 1.2rem 0.7rem 1rem;
+    border: 1px solid var(--line);
+    background: var(--frost-2);
+    font-size: 0.9rem;
+  }
+  .toc-title {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .toc ol { margin: 0; padding-left: 0; list-style: none; counter-reset: toc; }
+  .toc ol ol { padding-left: 1.2em; }
+  .toc li { margin: 0.1rem 0; counter-increment: toc; }
+  .toc li::before { content: counters(toc, ".") ". "; color: var(--muted); }
+
+  /* ===== 表（wikitable） ===== */
+  .wikitable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.92rem;
+    background: var(--frost-2);
+  }
+  .wikitable th, .wikitable td {
+    border: 1px solid var(--line);
+    padding: 0.4rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .wikitable thead th {
+    background: var(--frost);
+    text-align: center;
+  }
+  .wikitable td.date { white-space: nowrap; width: 7.5rem; }
+  .wikitable tbody tr:nth-child(even) td { background: var(--paper); }
+
+  sup.ref { font-size: 0.75em; line-height: 0; }
+  sup.ref a { padding: 0 0.1em; }
+
+  /* ===== 脚注 ===== */
+  .references {
+    font-size: 0.86rem;
+    padding-left: 1.8rem;
+    margin: 0.5rem 0;
+  }
+  .references li { margin: 0.2rem 0; }
+  .references li:target { background: var(--frost); }
+  .backlink { font-weight: 700; margin-right: 0.3em; }
+
+  .todo {
+    color: var(--todo);
+    background: var(--todo-bg);
+    padding: 0 0.3rem;
+    border-radius: 3px;
+  }
+
+  /* ===== フッター ===== */
+  footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1.25rem 16px 3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer p { margin: 0.3rem 0; }
+
+  /* 表はインフォボックスの横の残り幅に収める（入らなければ下に回る） */
+  .table-wrap {
+    overflow-x: auto;
+    min-width: min(100%, 26rem);
+  }
+  .table-wrap .wikitable { margin: 0.75rem 0; }
+
+  /* ===== タブレット ===== */
+  @media (max-width: 960px) {
+    .infobox {
+      float: none;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 1.25rem;
+    }
+  }
+
+  /* ===== スマホ ===== */
+  @media (max-width: 720px) {
+    article { padding: 1rem 1rem 1.5rem; }
+    .title { font-size: 1.6rem; }
+    .infobox { float: none; width: 100%; margin: 0 0 1rem; }
+    .toc { display: block; }
+    .wikitable thead { display: none; }
+    .wikitable, .wikitable tbody, .wikitable tr, .wikitable td { display: block; width: auto !important; }
+    .wikitable tr { border: 1px solid var(--line); margin-bottom: 0.5rem; }
+    .wikitable td { border: none; padding: 0.2rem 0.65rem; text-align: left !important; }
+    .wikitable td.date { font-weight: 700; color: var(--link); padding-top: 0.45rem; }
+  }
+
+  /* ===== マシュマロ対応表 ===== */
+  .site-name a { color: inherit; text-decoration: none; }
+  .crumb { font-size: 0.85rem; margin: 0 0 0.75rem; }
+  .crumb.end { margin: 2rem 0 0; }
+  .src { font-size: 0.86rem; color: var(--muted); margin: 0.2rem 0 0.4rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; padding: 0; margin: 0.4rem 0 1rem; list-style: none; font-size: 0.88rem; }
+  .wikitable.mm td.item { width: 42%; }
+  .wikitable.mm td.rate { width: 4.8rem; text-align: center; white-space: nowrap; font-weight: 700; }
+  .r-great, .r-ok { color: var(--link); }
+  .r-part { color: var(--todo); }
+  .r-no, .r-tbd { color: var(--muted); }
+  @media (max-width: 720px) {
+    .wikitable.mm td.item { font-weight: 700; padding-top: 0.45rem; }
+    .wikitable.mm td.rate { text-align: left !important; }
+    .wikitable.mm td.rate::before { content: "対応度："; color: var(--muted); font-weight: 400; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <span class="site-name"><a href="./">北海道九日市報 ～ 九日なここ だより ～</a></span>
+    <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式まとめサイト</span>
+  </div>
+  <div class="drift" aria-hidden="true"></div>
+</header>
+
+<div class="notice">
+  <p>これは九日市民の自費出版による市報です。九日なここご本人さまと直接は関係ありません。</p>
+</div>
+
+<main>
+<article>
+
+  <p class="crumb"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
+
+  <h1 class="title">マシュマロ対応表</h1>
+  <p class="subtitle">配信で紹介された<a href="https://marshmallow-qa.com/ntvfcgv5xneeup3">マシュマロ</a>（質問・お願い）と、その対応の一覧（33件）</p>
+
+  <p>九日なここさんは、マシュマロに届いた質問やお願いを配信で紹介しており、ある程度の無茶振りにも対応してくれます。紹介された配信ごとに、内容と対応をまとめました。</p>
+
+  <p><b>対応度の見かた</b></p>
+  <ul class="legend">
+    <li><span class="r-great">◎</span> 期待以上に対応</li>
+    <li><span class="r-ok">〇</span> 対応した</li>
+    <li><span class="r-part">▲</span> 一部対応・試したが不採用</li>
+    <li><span class="r-no">×</span> 見送り</li>
+    <li><span class="r-tbd">？</span> 未実施（今後は未定）</li>
+  </ul>
+
+  <nav class="toc" aria-label="目次">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#s0709">2026年7月9日（初配信）</a></li>
+      <li><a href="#s1019">2026年10月19日（自己紹介・挨拶を考えてみよう）</a></li>
+      <li><a href="#s1029">2026年10月29日（ハロウィン（間近）の雑談）</a></li>
+      <li><a href="#s1109">2026年11月9日（坂本龍馬の話をしたい）</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="s0709">2026年7月9日</h2>
+  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">初配信</a>（YouTube）</p>
+  <div class="table-wrap">
+  <table class="wikitable mm">
+    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+    <tbody>
+        <tr>
+          <td class="item">旭川のおすすめ飲食店は？</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">ジャパチーズのソフトクリームを紹介。あまりに興奮しすぎて咳込むほど。</td>
+        </tr>
+        <tr>
+          <td class="item">九日なここの名前の由来は？</td>
+          <td class="rate"><span class="r-ok">▲⇒〇</span></td>
+          <td class="cmt">その場では苗字の由来のみ回答。なぜか下の名前の回答は難しいとして回答を控えたが、後日下の名前の由来も公開している。</td>
+        </tr>
+        <tr>
+          <td class="item">総合タグ、ファンアートタグは？</td>
+          <td class="rate"><span class="r-great">◎</span></td>
+          <td class="cmt">その場で発表。加えて配信タグやファンネームもこの場で決定。</td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="s1019">2026年10月19日</h2>
+  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">自己紹介・挨拶を考えてみよう</a>（YouTube）</p>
+  <div class="table-wrap">
+  <table class="wikitable mm">
+    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+    <tbody>
+        <tr>
+          <td class="item">自己紹介文案①「○○と旭川を愛す キュートな九尾なVTuber 九日なここと申します 以後お見知りおきを」</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">声色などパターンを変えて何度も読み上げた（「きれいなお姉さん」パターン等）。しかし最終的には採用せず。</td>
+        </tr>
+        <tr>
+          <td class="item">自己紹介文案②「あら楽し 美麗モデルの 身は捨てた 九日なここに かかる雲なし よろしくお願いします」</td>
+          <td class="rate"><span class="r-part">▲</span></td>
+          <td class="cmt">大石内蔵助の辞世の句をもじった挨拶。読み上げたものの「挨拶に辞世の句？」と突っ込みを入れる。最終的に採用せず。</td>
+        </tr>
+        <tr>
+          <td class="item">自己紹介文案③「わたし 旭川のために働きます たとえのどに負担がかかる仕事があっても わたしは風邪も引きません！ それが九日なここなのです」</td>
+          <td class="rate"><span class="r-part">▲</span></td>
+          <td class="cmt">「檄！帝国華撃団」の歌詞をもじった挨拶。読み上げ後、「なここ、風邪ひいてたのだけど」と突っ込みを入れる。最終的に採用せず。</td>
+        </tr>
+        <tr>
+          <td class="item">配信用挨拶案</td>
+          <td class="rate"><span class="r-part">▲</span></td>
+          <td class="cmt">市民とのコールアンドレスポンス形式の挨拶案。配信中に試したもののコメント反映までのラグが大きく、不採用に。</td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="s1029">2026年10月29日</h2>
+  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">ハロウィン（間近）の雑談</a>（YouTube）</p>
+  <div class="table-wrap">
+  <table class="wikitable mm">
+    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+    <tbody>
+        <tr>
+          <td class="item">配信テーマ案①配信テーマを考えよう</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">この回が実質配信テーマを考える回であった。</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案②夢（目標）を語ろう</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済（将来採用するかは未定）</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案③100問チャレンジ</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案④方言ってカワイイ</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑤旭川おすすめグルメ紹介</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">初配信時のマシュマロ回答でジャパチーズを紹介</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑥もう冬だね、と感じる瞬間</td>
+          <td class="rate"><span class="r-no">×</span></td>
+          <td class="cmt">雪降ったら冬。と一蹴。</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑦旭川駅周辺鉄道orバス旅</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑧北海道はでっかいどう</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑨九日なここナレーターへの道（早口言葉に挑戦）</td>
+          <td class="rate"><span class="r-part">▲</span></td>
+          <td class="cmt">その場で少し早口言葉を披露</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑩落語一席</td>
+          <td class="rate"><span class="r-no">×</span></td>
+          <td class="cmt">相当難しいと否定的（ただ、アマチュアもいたりするので、いつか是非挑戦してほしいと一市民は思う）</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑪○○時間耐久カラオケ</td>
+          <td class="rate"><span class="r-part">▲</span></td>
+          <td class="cmt">著作権関連が難しいので、音源入りで何曲も歌うのは厳しい。権利を確認したうえで「歌ってみた」動画であれば出すかも。</td>
+        </tr>
+        <tr>
+          <td class="item">配信テーマ案⑫今年の漢字を予想しよう</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">ハロウィンネタ「なここさんの思い出」</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">子供の頃、母なここが作ってくれたかぼちゃプリンが思い出。その後ハロウィンまでの期間、Xでずっとかぼちゃプリンの話をしていた。</td>
+        </tr>
+        <tr>
+          <td class="item">ハロウィンネタ「旭川のハロウィンイベント」</td>
+          <td class="rate"><span class="r-no">×</span></td>
+          <td class="cmt">旭川はハロウィン直前の土日で主だったイベントが終わってしまっていて、紹介のしようが無かった。</td>
+        </tr>
+        <tr>
+          <td class="item">ハロウィンネタ「ハロウィン仕様衣装・背景」</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">ハロウィンネタ「超美麗3Dモデルによるハロウィン料理配信」</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="s1109">2026年11月9日</h2>
+  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">坂本龍馬の話をしたい</a>（YouTube）</p>
+  <div class="table-wrap">
+  <table class="wikitable mm">
+    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+    <tbody>
+        <tr>
+          <td class="item">ポッキー&amp;プリッツの日「何味が好き？」</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">ビター味が好き、と回答。</td>
+        </tr>
+        <tr>
+          <td class="item">ポッキー&amp;プリッツの日「地元ポッキー夕張メロン味、食べたことある？」</td>
+          <td class="rate"><span class="r-ok">〇</span></td>
+          <td class="cmt">無いので、配信までにいろいろなお店を探してくれた模様。結局見つからなかったが、配信後リスナーから購入可能なお店を紹介してもらった模様。</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト①クリスマスの思い出を語ろう</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト②今年ほしいプレゼントは？</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト③クリスマスの童謡アカペラ歌唱</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト④旭川のおすすめクリスマスイベント/スポット</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト⑤理想（妄想）のクリスマスデート/シチュ</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト⑥九日なここ女優への道：クリスマス特別一人朗読劇</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト⑦衣装差分サンタコス</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+        <tr>
+          <td class="item">クリスマス直前配信テーマリクエスト⑧九日なここ女優への道：自作シナリオによるクリスマス特別朗読劇</td>
+          <td class="rate"><span class="r-tbd">？</span></td>
+          <td class="cmt">未済</td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="crumb end"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
+
+</article>
+</main>
+
+<footer>
+  <p>当サイトは九日なここさんを応援するファンによる非公式サイトです。掲載内容の誤りや削除のご要望は <a href="https://github.com/otocolobuslove/9th-city-site/discussions">GitHub Discussions</a> までお知らせください（<a href="request.html">要望の送り方</a>）。</p>
+  <p>最終更新：2026-11-15（日付は日本時間）</p>
+</footer>
+
+</body>
+</html>
