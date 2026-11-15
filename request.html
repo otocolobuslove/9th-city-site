@@ -325,6 +325,32 @@
   .toc li { margin: 0.1rem 0; counter-increment: toc; }
   .toc li::before { content: counters(toc, ".") ". "; color: var(--muted); }
 
+
+  /* ===== 畳み込み ===== */
+  details.sec, details.subsec { margin: 0; }
+  details.sec > summary, details.subsec > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  details.sec > summary::-webkit-details-marker,
+  details.subsec > summary::-webkit-details-marker { display: none; }
+  details.sec > summary > h2::after,
+  details.subsec > summary > h3::after {
+    content: "▾";
+    float: right;
+    font-family: system-ui, sans-serif;
+    font-size: 0.85rem;
+    line-height: 2.2;
+    color: var(--muted);
+  }
+  details.sec:not([open]) > summary > h2::after,
+  details.subsec:not([open]) > summary > h3::after { content: "▸ 開く"; }
+  details.sec > summary:hover > h2,
+  details.subsec > summary:hover > h3 { color: var(--link); }
+  details.sec > summary:focus-visible,
+  details.subsec > summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .backtop { text-align: right; font-size: 0.82rem; margin: 0.6rem 0 0; }
+
   /* ===== 表（wikitable） ===== */
   .wikitable {
     width: 100%;
@@ -464,7 +490,7 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" id="top">
   <div class="inner">
     <span class="site-name"><a href="./">北海道九日市報 ～ 九日なここ だより ～</a></span>
     <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式まとめサイト</span>
@@ -500,123 +526,138 @@
 
   <p class="hint">GitHub の画面は英語です。このページでは、押すボタンを <span class="ui">Sign up</span> のように表示しています。画面のデザインは変わることがあるので、多少違っていても近い名前のボタンを探してみてください。</p>
 
-  <h2 id="account">GitHub のアカウントを作る</h2>
-  <ol class="steps">
-    <li>
-      <a href="https://github.com/signup">GitHub の登録ページ</a>を開きます。
-    </li>
-    <li>
-      登録の方法を選びます。
+  <details class="sec" open>
+    <summary><h2 id="account">GitHub のアカウントを作る</h2></summary>
+    <ol class="steps">
+      <li>
+        <a href="https://github.com/signup">GitHub の登録ページ</a>を開きます。
+      </li>
+      <li>
+        登録の方法を選びます。
+        <ul>
+          <li><b>Google アカウントで登録する</b>：<span class="ui">Continue with Google</span> を押します。</li>
+          <li><b>メールアドレスで登録する</b>：メールアドレス、パスワード、ユーザー名を入力します。</li>
+        </ul>
+      </li>
+      <li>
+        <b>ユーザー名（Username）</b>を決めます。ユーザー名は投稿に表示され、<b>誰でも見られます</b>。
+        本名や、ほかの SNS と同じ名前を出したくない方は、別の名前にしておくと安心です。使えるのは英数字とハイフン（-）です。
+      </li>
+      <li>
+        ロボットではないことの確認（簡単なパズルなど）が出たら、画面の案内に沿って答えます。
+      </li>
+      <li>
+        登録したメールアドレスに、GitHub から<b>確認コード</b>が届きます。届いたコードを画面に入力します。
+        届かないときは、迷惑メールのフォルダも見てみてください。
+      </li>
+      <li>
+        使い方などの質問画面が出たら、答えても、<span class="ui">Skip</span> などで飛ばしても大丈夫です。
+      </li>
+    </ol>
+    <p class="hint">
+      「This email can't be used」などのエラーが出たときは、別のブラウザで試す、少し時間をおいて試す、別のメールアドレスを使う、といった方法があります。
+      詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/account-management/creating-an-account-on-github">アカウント作成の解説</a>をご覧ください。
+      また、登録後に「2要素認証（2FA）」の設定を勧められます。アカウントを乗っ取られにくくなるので、設定しておくのがおすすめです。
+    </p>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
+
+  <details class="sec" open>
+    <summary><h2 id="email">メールアドレスを公開したくない方へ</h2></summary>
+    <p>
+      まず安心してほしいのは、<b>登録したメールアドレスは、初期設定のままでは他の人に表示されない</b>ということです。
+      Discussions に投稿しても、表示されるのはユーザー名とアイコンだけです。
+    </p>
+    <p>さらに念のため、次の設定をしておくとより安心です。</p>
+    <ol class="steps">
+      <li>
+        ログインした状態で、<a href="https://github.com/settings/emails">メールアドレスの設定ページ</a>を開きます
+        （右上のアイコン → <span class="ui">Settings</span> → 左のメニューの <span class="ui">Emails</span> でも開けます）。
+      </li>
+      <li>
+        <span class="ui">Keep my email addresses private</span> にチェックを入れます。
+        同じページの <span class="ui">Block command line pushes that expose my email</span> にもチェックを入れておくと、なお安心です。
+      </li>
+      <li>
+        左のメニューの <span class="ui">Public profile</span> を開き、<span class="ui">Public email</span> が
+        <span class="ui">Don't show my email address</span>（表示しない）になっていることを確認します。
+      </li>
+    </ol>
+    <p class="hint">
+      2番の設定は、主にプログラムを書く人向けのもので、オンにしておくとメールアドレスの代わりに GitHub 専用の匿名のアドレスが使われます。
+      詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address">メールアドレスの設定の解説</a>をご覧ください。
+    </p>
+    <p>
+      それでも普段のメールアドレスを使うのが気になる方は、GitHub 用に<b>新しいメールアドレス</b>（Gmail などの無料のもの）を作って、それで登録する方法もあります。
+    </p>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
+
+  <details class="sec" open>
+    <summary><h2 id="post">Discussions に要望を投稿する</h2></summary>
+    <ol class="steps">
+      <li>
+        このサイトの <a href="https://github.com/otocolobuslove/9th-city-site/discussions">Discussions</a> を開きます。ログインしていなければ、ログインします。
+      </li>
+      <li>
+        右上の <span class="ui">New discussion</span> を押します。
+      </li>
+      <li>
+        カテゴリ（投稿の種類）を選びます。迷ったら <span class="ui">Ideas</span> で大丈夫です。
+        <table class="wikitable cat">
+          <thead><tr><th>こんなとき</th><th>選ぶカテゴリ</th></tr></thead>
+          <tbody>
+            <tr><td>内容の訂正・追加・削除をお願いしたい</td><td><span class="ui">Ideas</span></td></tr>
+            <tr><td>サイトについて質問したい</td><td><span class="ui">Q&amp;A</span></td></tr>
+            <tr><td>それ以外（感想など）</td><td><span class="ui">General</span></td></tr>
+          </tbody>
+        </table>
+        <span class="ui">Announcements</span> は運営からのお知らせ用なので、投稿できません。
+      </li>
+      <li>
+        タイトル（<span class="ui">Title</span>）と本文を書いて、<span class="ui">Start discussion</span> を押せば投稿完了です。
+      </li>
+    </ol>
+    <p><a class="button" href="https://github.com/otocolobuslove/9th-city-site/discussions/new?category=ideas">訂正・追加・削除の要望を書く（Ideas）</a></p>
+
+    <details class="subsec" open>
+      <summary><h3 id="example">書き方の例</h3></summary>
+      <div class="example">
+        <p><b>タイトル</b>：【訂正】活動歴 9/19 の内容</p>
+        <p><b>本文</b>：</p>
+        <ul>
+          <li>どこを：活動歴の 2026-09-19 の行</li>
+          <li>どう直してほしいか：〇〇を△△に直してほしいです</li>
+          <li>出典：https://www.youtube.com/watch?v=…（〇分ごろ）</li>
+        </ul>
+      </div>
+      <p>
+        このサイトは、公式の配信や X のポストを出典にしています。<b>出典の URL</b>（配信なら話していた時間も）を書いてもらえると、確認して反映しやすくなります。
+      </p>
+    </details>
+
+    <details class="subsec" open>
+      <summary><h3 id="manners">投稿するときのお願い</h3></summary>
       <ul>
-        <li><b>Google アカウントで登録する</b>：<span class="ui">Continue with Google</span> を押します。</li>
-        <li><b>メールアドレスで登録する</b>：メールアドレス、パスワード、ユーザー名を入力します。</li>
+        <li>Discussions は<b>誰でも見られる場所</b>です。本名・住所・連絡先などの個人情報は書かないでください。</li>
+        <li>配信やポストで公開されていない情報や、九日なここさんのご迷惑になりそうな話題は扱いません。</li>
+        <li>ご本人さま・関係者さまからの訂正や削除のご要望は、優先して対応します。</li>
+        <li>個人で運営しているため、お返事や反映に時間がかかることがあります。</li>
       </ul>
-    </li>
-    <li>
-      <b>ユーザー名（Username）</b>を決めます。ユーザー名は投稿に表示され、<b>誰でも見られます</b>。
-      本名や、ほかの SNS と同じ名前を出したくない方は、別の名前にしておくと安心です。使えるのは英数字とハイフン（-）です。
-    </li>
-    <li>
-      ロボットではないことの確認（簡単なパズルなど）が出たら、画面の案内に沿って答えます。
-    </li>
-    <li>
-      登録したメールアドレスに、GitHub から<b>確認コード</b>が届きます。届いたコードを画面に入力します。
-      届かないときは、迷惑メールのフォルダも見てみてください。
-    </li>
-    <li>
-      使い方などの質問画面が出たら、答えても、<span class="ui">Skip</span> などで飛ばしても大丈夫です。
-    </li>
-  </ol>
-  <p class="hint">
-    「This email can't be used」などのエラーが出たときは、別のブラウザで試す、少し時間をおいて試す、別のメールアドレスを使う、といった方法があります。
-    詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/account-management/creating-an-account-on-github">アカウント作成の解説</a>をご覧ください。
-    また、登録後に「2要素認証（2FA）」の設定を勧められます。アカウントを乗っ取られにくくなるので、設定しておくのがおすすめです。
-  </p>
+    </details>
 
-  <h2 id="email">メールアドレスを公開したくない方へ</h2>
-  <p>
-    まず安心してほしいのは、<b>登録したメールアドレスは、初期設定のままでは他の人に表示されない</b>ということです。
-    Discussions に投稿しても、表示されるのはユーザー名とアイコンだけです。
-  </p>
-  <p>さらに念のため、次の設定をしておくとより安心です。</p>
-  <ol class="steps">
-    <li>
-      ログインした状態で、<a href="https://github.com/settings/emails">メールアドレスの設定ページ</a>を開きます
-      （右上のアイコン → <span class="ui">Settings</span> → 左のメニューの <span class="ui">Emails</span> でも開けます）。
-    </li>
-    <li>
-      <span class="ui">Keep my email addresses private</span> にチェックを入れます。
-      同じページの <span class="ui">Block command line pushes that expose my email</span> にもチェックを入れておくと、なお安心です。
-    </li>
-    <li>
-      左のメニューの <span class="ui">Public profile</span> を開き、<span class="ui">Public email</span> が
-      <span class="ui">Don't show my email address</span>（表示しない）になっていることを確認します。
-    </li>
-  </ol>
-  <p class="hint">
-    2番の設定は、主にプログラムを書く人向けのもので、オンにしておくとメールアドレスの代わりに GitHub 専用の匿名のアドレスが使われます。
-    詳しくは GitHub 公式の<a href="https://docs.github.com/ja/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address">メールアドレスの設定の解説</a>をご覧ください。
-  </p>
-  <p>
-    それでも普段のメールアドレスを使うのが気になる方は、GitHub 用に<b>新しいメールアドレス</b>（Gmail などの無料のもの）を作って、それで登録する方法もあります。
-  </p>
-
-  <h2 id="post">Discussions に要望を投稿する</h2>
-  <ol class="steps">
-    <li>
-      このサイトの <a href="https://github.com/otocolobuslove/9th-city-site/discussions">Discussions</a> を開きます。ログインしていなければ、ログインします。
-    </li>
-    <li>
-      右上の <span class="ui">New discussion</span> を押します。
-    </li>
-    <li>
-      カテゴリ（投稿の種類）を選びます。迷ったら <span class="ui">Ideas</span> で大丈夫です。
-      <table class="wikitable cat">
-        <thead><tr><th>こんなとき</th><th>選ぶカテゴリ</th></tr></thead>
-        <tbody>
-          <tr><td>内容の訂正・追加・削除をお願いしたい</td><td><span class="ui">Ideas</span></td></tr>
-          <tr><td>サイトについて質問したい</td><td><span class="ui">Q&amp;A</span></td></tr>
-          <tr><td>それ以外（感想など）</td><td><span class="ui">General</span></td></tr>
-        </tbody>
-      </table>
-      <span class="ui">Announcements</span> は運営からのお知らせ用なので、投稿できません。
-    </li>
-    <li>
-      タイトル（<span class="ui">Title</span>）と本文を書いて、<span class="ui">Start discussion</span> を押せば投稿完了です。
-    </li>
-  </ol>
-  <p><a class="button" href="https://github.com/otocolobuslove/9th-city-site/discussions/new?category=ideas">訂正・追加・削除の要望を書く（Ideas）</a></p>
-
-  <h3 id="example">書き方の例</h3>
-  <div class="example">
-    <p><b>タイトル</b>：【訂正】活動歴 9/19 の内容</p>
-    <p><b>本文</b>：</p>
-    <ul>
-      <li>どこを：活動歴の 2026-09-19 の行</li>
-      <li>どう直してほしいか：〇〇を△△に直してほしいです</li>
-      <li>出典：https://www.youtube.com/watch?v=…（〇分ごろ）</li>
-    </ul>
-  </div>
-  <p>
-    このサイトは、公式の配信や X のポストを出典にしています。<b>出典の URL</b>（配信なら話していた時間も）を書いてもらえると、確認して反映しやすくなります。
-  </p>
-
-  <h3 id="manners">投稿するときのお願い</h3>
-  <ul>
-    <li>Discussions は<b>誰でも見られる場所</b>です。本名・住所・連絡先などの個人情報は書かないでください。</li>
-    <li>配信やポストで公開されていない情報や、九日なここさんのご迷惑になりそうな話題は扱いません。</li>
-    <li>ご本人さま・関係者さまからの訂正や削除のご要望は、優先して対応します。</li>
-    <li>個人で運営しているため、お返事や反映に時間がかかることがあります。</li>
-  </ul>
-
-  <h3 id="after">投稿したあと</h3>
-  <ul>
-    <li>返信がつくと、GitHub から登録したメールアドレスにお知らせが届きます。</li>
-    <li>自分の投稿は、投稿の右上の <span class="ui">…</span> から、あとで編集や削除ができます。</li>
-  </ul>
-  <p class="hint">
-    Discussions の使い方は、GitHub 公式の<a href="https://docs.github.com/ja/discussions/collaborating-with-your-community-using-discussions/participating-in-a-discussion">ディスカッションへの参加の解説</a>にもまとまっています。
-  </p>
+    <details class="subsec" open>
+      <summary><h3 id="after">投稿したあと</h3></summary>
+      <ul>
+        <li>返信がつくと、GitHub から登録したメールアドレスにお知らせが届きます。</li>
+        <li>自分の投稿は、投稿の右上の <span class="ui">…</span> から、あとで編集や削除ができます。</li>
+      </ul>
+      <p class="hint">
+        Discussions の使い方は、GitHub 公式の<a href="https://docs.github.com/ja/discussions/collaborating-with-your-community-using-discussions/participating-in-a-discussion">ディスカッションへの参加の解説</a>にもまとまっています。
+      </p>
+    </details>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
 
   <p class="crumb"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
 
@@ -628,5 +669,21 @@
   <p>最終更新：2026-11-12（日付は日本時間）</p>
 </footer>
 
+<script>
+  // 畳んだ章の中へリンクで飛ぶときは、その章を開く
+  (function () {
+    function openTo(id) {
+      var el = id && document.getElementById(decodeURIComponent(id));
+      var d = el && el.closest('details');
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (a) openTo(a.getAttribute('href').slice(1));
+    });
+    window.addEventListener('hashchange', function () { openTo(location.hash.slice(1)); });
+    if (location.hash) openTo(location.hash.slice(1));
+  })();
+</script>
 </body>
 </html>

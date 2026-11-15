@@ -330,6 +330,32 @@
   .toc li { margin: 0.1rem 0; counter-increment: toc; }
   .toc li::before { content: counters(toc, ".") ". "; color: var(--muted); }
 
+
+  /* ===== 畳み込み ===== */
+  details.sec, details.subsec { margin: 0; }
+  details.sec > summary, details.subsec > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  details.sec > summary::-webkit-details-marker,
+  details.subsec > summary::-webkit-details-marker { display: none; }
+  details.sec > summary > h2::after,
+  details.subsec > summary > h3::after {
+    content: "▾";
+    float: right;
+    font-family: system-ui, sans-serif;
+    font-size: 0.85rem;
+    line-height: 2.2;
+    color: var(--muted);
+  }
+  details.sec:not([open]) > summary > h2::after,
+  details.subsec:not([open]) > summary > h3::after { content: "▸ 開く"; }
+  details.sec > summary:hover > h2,
+  details.subsec > summary:hover > h3 { color: var(--link); }
+  details.sec > summary:focus-visible,
+  details.subsec > summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .backtop { text-align: right; font-size: 0.82rem; margin: 0.6rem 0 0; }
+
   /* ===== 表（wikitable） ===== */
   .wikitable {
     width: 100%;
@@ -431,7 +457,7 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" id="top">
   <div class="inner">
     <span class="site-name"><a href="./">北海道九日市報 ～ 九日なここ だより ～</a></span>
     <span class="site-tag">旭川市非公式Vtuber・九日なここさんの非公式まとめサイト</span>
@@ -472,210 +498,222 @@
     </ol>
   </nav>
 
-  <h2 id="s0709">2026年7月9日</h2>
-  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">初配信</a>（YouTube）</p>
-  <div class="table-wrap">
-  <table class="wikitable mm">
-    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
-    <tbody>
-        <tr>
-          <td class="item">旭川のおすすめ飲食店は？</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">ジャパチーズのソフトクリームを紹介。あまりに興奮しすぎて咳込むほど。</td>
-        </tr>
-        <tr>
-          <td class="item">九日なここの名前の由来は？</td>
-          <td class="rate"><span class="r-ok">▲⇒〇</span></td>
-          <td class="cmt">その場では苗字の由来のみ回答。なぜか下の名前の回答は難しいとして回答を控えたが、後日下の名前の由来も公開している。</td>
-        </tr>
-        <tr>
-          <td class="item">総合タグ、ファンアートタグは？</td>
-          <td class="rate"><span class="r-great">◎</span></td>
-          <td class="cmt">その場で発表。加えて配信タグやファンネームもこの場で決定。</td>
-        </tr>
-    </tbody>
-  </table>
-  </div>
+  <details class="sec" open>
+    <summary><h2 id="s0709">2026年7月9日</h2></summary>
+    <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=sErIfWx6EwE">初配信</a>（YouTube）</p>
+    <div class="table-wrap">
+    <table class="wikitable mm">
+      <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+      <tbody>
+          <tr>
+            <td class="item">旭川のおすすめ飲食店は？</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">ジャパチーズのソフトクリームを紹介。あまりに興奮しすぎて咳込むほど。</td>
+          </tr>
+          <tr>
+            <td class="item">九日なここの名前の由来は？</td>
+            <td class="rate"><span class="r-ok">▲⇒〇</span></td>
+            <td class="cmt">その場では苗字の由来のみ回答。なぜか下の名前の回答は難しいとして回答を控えたが、後日下の名前の由来も公開している。</td>
+          </tr>
+          <tr>
+            <td class="item">総合タグ、ファンアートタグは？</td>
+            <td class="rate"><span class="r-great">◎</span></td>
+            <td class="cmt">その場で発表。加えて配信タグやファンネームもこの場で決定。</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
 
-  <h2 id="s1019">2026年10月19日</h2>
-  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">自己紹介・挨拶を考えてみよう</a>（YouTube）</p>
-  <div class="table-wrap">
-  <table class="wikitable mm">
-    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
-    <tbody>
-        <tr>
-          <td class="item">自己紹介文案①「○○と旭川を愛す キュートな九尾なVTuber 九日なここと申します 以後お見知りおきを」</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">声色などパターンを変えて何度も読み上げた（「きれいなお姉さん」パターン等）。しかし最終的には採用せず。</td>
-        </tr>
-        <tr>
-          <td class="item">自己紹介文案②「あら楽し 美麗モデルの 身は捨てた 九日なここに かかる雲なし よろしくお願いします」</td>
-          <td class="rate"><span class="r-part">▲</span></td>
-          <td class="cmt">大石内蔵助の辞世の句をもじった挨拶。読み上げたものの「挨拶に辞世の句？」と突っ込みを入れる。最終的に採用せず。</td>
-        </tr>
-        <tr>
-          <td class="item">自己紹介文案③「わたし 旭川のために働きます たとえのどに負担がかかる仕事があっても わたしは風邪も引きません！ それが九日なここなのです」</td>
-          <td class="rate"><span class="r-part">▲</span></td>
-          <td class="cmt">「檄！帝国華撃団」の歌詞をもじった挨拶。読み上げ後、「なここ、風邪ひいてたのだけど」と突っ込みを入れる。最終的に採用せず。</td>
-        </tr>
-        <tr>
-          <td class="item">配信用挨拶案</td>
-          <td class="rate"><span class="r-part">▲</span></td>
-          <td class="cmt">市民とのコールアンドレスポンス形式の挨拶案。配信中に試したもののコメント反映までのラグが大きく、不採用に。</td>
-        </tr>
-    </tbody>
-  </table>
-  </div>
+  <details class="sec" open>
+    <summary><h2 id="s1019">2026年10月19日</h2></summary>
+    <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=G1IqyuLzmLo">自己紹介・挨拶を考えてみよう</a>（YouTube）</p>
+    <div class="table-wrap">
+    <table class="wikitable mm">
+      <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+      <tbody>
+          <tr>
+            <td class="item">自己紹介文案①「○○と旭川を愛す キュートな九尾なVTuber 九日なここと申します 以後お見知りおきを」</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">声色などパターンを変えて何度も読み上げた（「きれいなお姉さん」パターン等）。しかし最終的には採用せず。</td>
+          </tr>
+          <tr>
+            <td class="item">自己紹介文案②「あら楽し 美麗モデルの 身は捨てた 九日なここに かかる雲なし よろしくお願いします」</td>
+            <td class="rate"><span class="r-part">▲</span></td>
+            <td class="cmt">大石内蔵助の辞世の句をもじった挨拶。読み上げたものの「挨拶に辞世の句？」と突っ込みを入れる。最終的に採用せず。</td>
+          </tr>
+          <tr>
+            <td class="item">自己紹介文案③「わたし 旭川のために働きます たとえのどに負担がかかる仕事があっても わたしは風邪も引きません！ それが九日なここなのです」</td>
+            <td class="rate"><span class="r-part">▲</span></td>
+            <td class="cmt">「檄！帝国華撃団」の歌詞をもじった挨拶。読み上げ後、「なここ、風邪ひいてたのだけど」と突っ込みを入れる。最終的に採用せず。</td>
+          </tr>
+          <tr>
+            <td class="item">配信用挨拶案</td>
+            <td class="rate"><span class="r-part">▲</span></td>
+            <td class="cmt">市民とのコールアンドレスポンス形式の挨拶案。配信中に試したもののコメント反映までのラグが大きく、不採用に。</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
 
-  <h2 id="s1029">2026年10月29日</h2>
-  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">ハロウィン（間近）の雑談</a>（YouTube）</p>
-  <div class="table-wrap">
-  <table class="wikitable mm">
-    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
-    <tbody>
-        <tr>
-          <td class="item">配信テーマ案①配信テーマを考えよう</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">この回が実質配信テーマを考える回であった。</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案②夢（目標）を語ろう</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済（将来採用するかは未定）</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案③100問チャレンジ</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案④方言ってカワイイ</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑤旭川おすすめグルメ紹介</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">初配信時のマシュマロ回答でジャパチーズを紹介</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑥もう冬だね、と感じる瞬間</td>
-          <td class="rate"><span class="r-no">×</span></td>
-          <td class="cmt">雪降ったら冬。と一蹴。</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑦旭川駅周辺鉄道orバス旅</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑧北海道はでっかいどう</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑨九日なここナレーターへの道（早口言葉に挑戦）</td>
-          <td class="rate"><span class="r-part">▲</span></td>
-          <td class="cmt">その場で少し早口言葉を披露</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑩落語一席</td>
-          <td class="rate"><span class="r-no">×</span></td>
-          <td class="cmt">相当難しいと否定的（ただ、アマチュアもいたりするので、いつか是非挑戦してほしいと一市民は思う）</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑪○○時間耐久カラオケ</td>
-          <td class="rate"><span class="r-part">▲</span></td>
-          <td class="cmt">著作権関連が難しいので、音源入りで何曲も歌うのは厳しい。権利を確認したうえで「歌ってみた」動画であれば出すかも。</td>
-        </tr>
-        <tr>
-          <td class="item">配信テーマ案⑫今年の漢字を予想しよう</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">ハロウィンネタ「なここさんの思い出」</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">子供の頃、母なここが作ってくれたかぼちゃプリンが思い出。その後ハロウィンまでの期間、Xでずっとかぼちゃプリンの話をしていた。</td>
-        </tr>
-        <tr>
-          <td class="item">ハロウィンネタ「旭川のハロウィンイベント」</td>
-          <td class="rate"><span class="r-no">×</span></td>
-          <td class="cmt">旭川はハロウィン直前の土日で主だったイベントが終わってしまっていて、紹介のしようが無かった。</td>
-        </tr>
-        <tr>
-          <td class="item">ハロウィンネタ「ハロウィン仕様衣装・背景」</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">ハロウィンネタ「超美麗3Dモデルによるハロウィン料理配信」</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-    </tbody>
-  </table>
-  </div>
+  <details class="sec" open>
+    <summary><h2 id="s1029">2026年10月29日</h2></summary>
+    <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=-k9Y_1hxSH4">ハロウィン（間近）の雑談</a>（YouTube）</p>
+    <div class="table-wrap">
+    <table class="wikitable mm">
+      <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+      <tbody>
+          <tr>
+            <td class="item">配信テーマ案①配信テーマを考えよう</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">この回が実質配信テーマを考える回であった。</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案②夢（目標）を語ろう</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済（将来採用するかは未定）</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案③100問チャレンジ</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案④方言ってカワイイ</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑤旭川おすすめグルメ紹介</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">初配信時のマシュマロ回答でジャパチーズを紹介</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑥もう冬だね、と感じる瞬間</td>
+            <td class="rate"><span class="r-no">×</span></td>
+            <td class="cmt">雪降ったら冬。と一蹴。</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑦旭川駅周辺鉄道orバス旅</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済（将来採用するかは未定。実施するにせよ、動画になる可能性が高い）</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑧北海道はでっかいどう</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑨九日なここナレーターへの道（早口言葉に挑戦）</td>
+            <td class="rate"><span class="r-part">▲</span></td>
+            <td class="cmt">その場で少し早口言葉を披露</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑩落語一席</td>
+            <td class="rate"><span class="r-no">×</span></td>
+            <td class="cmt">相当難しいと否定的（ただ、アマチュアもいたりするので、いつか是非挑戦してほしいと一市民は思う）</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑪○○時間耐久カラオケ</td>
+            <td class="rate"><span class="r-part">▲</span></td>
+            <td class="cmt">著作権関連が難しいので、音源入りで何曲も歌うのは厳しい。権利を確認したうえで「歌ってみた」動画であれば出すかも。</td>
+          </tr>
+          <tr>
+            <td class="item">配信テーマ案⑫今年の漢字を予想しよう</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">ハロウィンネタ「なここさんの思い出」</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">子供の頃、母なここが作ってくれたかぼちゃプリンが思い出。その後ハロウィンまでの期間、Xでずっとかぼちゃプリンの話をしていた。</td>
+          </tr>
+          <tr>
+            <td class="item">ハロウィンネタ「旭川のハロウィンイベント」</td>
+            <td class="rate"><span class="r-no">×</span></td>
+            <td class="cmt">旭川はハロウィン直前の土日で主だったイベントが終わってしまっていて、紹介のしようが無かった。</td>
+          </tr>
+          <tr>
+            <td class="item">ハロウィンネタ「ハロウィン仕様衣装・背景」</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">ハロウィンネタ「超美麗3Dモデルによるハロウィン料理配信」</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
 
-  <h2 id="s1109">2026年11月9日</h2>
-  <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">坂本龍馬の話をしたい</a>（YouTube）</p>
-  <div class="table-wrap">
-  <table class="wikitable mm">
-    <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
-    <tbody>
-        <tr>
-          <td class="item">ポッキー&amp;プリッツの日「何味が好き？」</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">ビター味が好き、と回答。</td>
-        </tr>
-        <tr>
-          <td class="item">ポッキー&amp;プリッツの日「地元ポッキー夕張メロン味、食べたことある？」</td>
-          <td class="rate"><span class="r-ok">〇</span></td>
-          <td class="cmt">無いので、配信までにいろいろなお店を探してくれた模様。結局見つからなかったが、配信後リスナーから購入可能なお店を紹介してもらった模様。</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト①クリスマスの思い出を語ろう</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト②今年ほしいプレゼントは？</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト③クリスマスの童謡アカペラ歌唱</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト④旭川のおすすめクリスマスイベント/スポット</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト⑤理想（妄想）のクリスマスデート/シチュ</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト⑥九日なここ女優への道：クリスマス特別一人朗読劇</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト⑦衣装差分サンタコス</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-        <tr>
-          <td class="item">クリスマス直前配信テーマリクエスト⑧九日なここ女優への道：自作シナリオによるクリスマス特別朗読劇</td>
-          <td class="rate"><span class="r-tbd">？</span></td>
-          <td class="cmt">未済</td>
-        </tr>
-    </tbody>
-  </table>
-  </div>
+  <details class="sec" open>
+    <summary><h2 id="s1109">2026年11月9日</h2></summary>
+    <p class="src">紹介した配信：<a href="https://www.youtube.com/watch?v=g9JZmXA3yZQ">坂本龍馬の話をしたい</a>（YouTube）</p>
+    <div class="table-wrap">
+    <table class="wikitable mm">
+      <thead><tr><th>内容</th><th>対応度</th><th>コメント</th></tr></thead>
+      <tbody>
+          <tr>
+            <td class="item">ポッキー&amp;プリッツの日「何味が好き？」</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">ビター味が好き、と回答。</td>
+          </tr>
+          <tr>
+            <td class="item">ポッキー&amp;プリッツの日「地元ポッキー夕張メロン味、食べたことある？」</td>
+            <td class="rate"><span class="r-ok">〇</span></td>
+            <td class="cmt">無いので、配信までにいろいろなお店を探してくれた模様。結局見つからなかったが、配信後リスナーから購入可能なお店を紹介してもらった模様。</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト①クリスマスの思い出を語ろう</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト②今年ほしいプレゼントは？</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト③クリスマスの童謡アカペラ歌唱</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト④旭川のおすすめクリスマスイベント/スポット</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト⑤理想（妄想）のクリスマスデート/シチュ</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト⑥九日なここ女優への道：クリスマス特別一人朗読劇</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト⑦衣装差分サンタコス</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+          <tr>
+            <td class="item">クリスマス直前配信テーマリクエスト⑧九日なここ女優への道：自作シナリオによるクリスマス特別朗読劇</td>
+            <td class="rate"><span class="r-tbd">？</span></td>
+            <td class="cmt">未済</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+  <p class="backtop"><a href="#top">↑ ページの先頭へ</a></p>
 
   <p class="crumb end"><a href="./">← 九日なここ（トップ）へ戻る</a></p>
 
@@ -687,5 +725,21 @@
   <p>最終更新：2026-11-15（日付は日本時間）</p>
 </footer>
 
+<script>
+  // 畳んだ章の中へリンクで飛ぶときは、その章を開く
+  (function () {
+    function openTo(id) {
+      var el = id && document.getElementById(decodeURIComponent(id));
+      var d = el && el.closest('details');
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (a) openTo(a.getAttribute('href').slice(1));
+    });
+    window.addEventListener('hashchange', function () { openTo(location.hash.slice(1)); });
+    if (location.hash) openTo(location.hash.slice(1));
+  })();
+</script>
 </body>
 </html>
