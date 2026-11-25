@@ -1,6 +1,6 @@
 // quiz-src/questions.mjs から quiz/data.js を生成する。
 //   node quiz-src/build.mjs
-// 正答は SHA-256 ハッシュ、解説（正答・参考資料込み）は AES-GCM で暗号化して書き出す。
+// 正答は SHA-256 ハッシュ、解説（正答・出典込み）は AES-GCM で暗号化して書き出す。
 // 鍵・ソルトは quiz/ 側の JS にもべた書き（見る気になれば見られる、程度の目隠し）。
 import { webcrypto as crypto } from "node:crypto";
 import { writeFileSync } from "node:fs";

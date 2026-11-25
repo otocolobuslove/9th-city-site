@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>旭川クイズ 20問</title>
-<meta name="description" content="旭川の地理・歴史・グルメ・文化に関するクイズ20問。4択、一問多答、並び替えの問題に答えて、採点後に解説ページで正誤と参考資料を確認できます。">
+<meta name="description" content="旭川の地理・歴史・グルメ・文化に関するクイズ20問（制限時間5分）。4択、一問多答、並び替えの問題に答えて、採点後に解説ページで正誤と出典を確認できます。">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>
   :root {
@@ -12,6 +12,7 @@
     --paper: #ffffff;
     --text: #1b2a28;
     --muted: #566b67;
+    --title: #0f4f45;
     --accent: #1a7064;
     --accent-ink: #ffffff;
     --soft: #e1f3ee;
@@ -19,18 +20,19 @@
     --line: #c2ddd5;
     --warn: #a14a06;
     --warn-bg: #fff3e2;
+    --danger: #b3261e;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4;
+      --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4; --title: #8fe0cf;
       --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622;
-      --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814;
+      --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814; --danger: #ff9b92;
     }
   }
   :root[data-theme="dark"] {
-    --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4;
+    --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4; --title: #8fe0cf;
     --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622;
-    --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814;
+    --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814; --danger: #ff9b92;
   }
   * { box-sizing: border-box; }
   body {
@@ -39,8 +41,7 @@
     line-height: 1.7;
   }
   main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  h1 { font-size: 1.6rem; margin: 8px 0 4px; }
-  .lead { color: var(--muted); margin: 0 0 20px; }
+  h1 { font-size: 1.6rem; margin: 8px 0 20px; text-align: center; color: var(--title); }
   .card {
     background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
     padding: 18px 20px; margin: 0 0 16px;
@@ -62,6 +63,7 @@
     padding: 6px 16px; margin: 0 0 16px; font-variant-numeric: tabular-nums;
   }
   .timer b { font-size: 1.15rem; }
+  .timer.low b { color: var(--danger); }
 
   .qhead { display: flex; gap: 10px; align-items: baseline; margin-bottom: 4px; }
   .qnum { font-weight: bold; color: var(--accent); white-space: nowrap; }
@@ -78,18 +80,36 @@
   .choices label:has(input:checked) { border-color: var(--accent); background: var(--soft); }
   .choices input { accent-color: var(--accent); width: 18px; height: 18px; flex: none; }
 
+  /* 並び替え：行をドラッグ（スマホは左のつまみ）か、右の ▲▼ で入れ替える */
   .order { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .order li {
-    display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 12px; border-radius: 8px;
-    border: 1px solid var(--line); background: var(--soft-2);
+    display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 4px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--paper); cursor: grab; user-select: none;
+    -webkit-user-select: none; position: relative; transition: box-shadow .15s, border-color .15s;
   }
-  .order .pos { font-weight: bold; color: var(--accent); width: 1.4em; }
-  .order .label { flex: 1; }
-  .order button { padding: 2px 10px; font-weight: normal; }
+  .order li.dragging {
+    z-index: 2; cursor: grabbing; border-color: var(--accent); background: var(--soft);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .18); transition: none;
+  }
+  .order li.flash { border-color: var(--accent); background: var(--soft); }
+  .order .grip {
+    flex: none; width: 34px; align-self: stretch; display: grid; place-items: center;
+    color: var(--muted); font-size: 1.1rem; touch-action: none; border-radius: 6px;
+  }
+  .order .grip:hover { background: var(--soft); }
+  .order .pos {
+    flex: none; width: 1.7em; height: 1.7em; display: grid; place-items: center; border-radius: 50%;
+    background: var(--accent); color: var(--accent-ink); font-weight: bold; font-size: .85rem;
+  }
+  .order .label { flex: 1; padding: 6px 0; }
+  .order .moves { display: flex; gap: 4px; flex: none; }
+  .order .moves button { padding: 0; width: 36px; height: 34px; font-size: .8rem; font-weight: normal; }
+  form[data-locked] .order li { cursor: default; }
   .hint { font-size: .85rem; color: var(--muted); margin: 6px 0 0; }
 
   .result { text-align: center; border-color: var(--accent); }
   .result .score { font-size: 2.2rem; font-weight: bold; color: var(--accent); margin: 4px 0; }
+  .result .timeup { color: var(--danger); font-weight: bold; }
   .result a.go {
     display: inline-block; margin-top: 10px; padding: 10px 22px; border-radius: 8px;
     background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: bold;
@@ -102,21 +122,21 @@
 <body>
 <main>
   <h1>旭川クイズ 20問</h1>
-  <p class="lead">地理・歴史・グルメ・文化など、旭川に関する問題です。</p>
 
   <section class="card" id="intro">
     <ul class="rules">
+      <li>地理・歴史・グルメ・文化など、旭川に関する問題です。</li>
       <li>全20問。4択、一問多答（当てはまるものをすべて選ぶ）、並び替えがあります。</li>
       <li>一問多答と並び替えは、完全に合っている場合のみ正解です。</li>
-      <li>「回答を始める」を押すと問題が表示され、時間の計測が始まります。「採点する」を押した時点で計測を終了します。</li>
-      <li>採点後は点数と所要時間のみ表示されます。各問の正誤と解説は、解説ページで確認できます。</li>
+      <li>制限時間は5分です。「回答を始める」を押すと問題が表示され、カウントダウンが始まります。時間切れになると、その時点の回答で自動的に採点します。</li>
+      <li>採点後は正解数と所要時間のみ表示されます。各問の正誤と解説は、解説ページで確認できます。</li>
     </ul>
     <p class="center" style="margin:16px 0 0"><button id="start" disabled>読み込み中…</button></p>
     <noscript><p class="warn">このクイズは JavaScript を使います。</p></noscript>
   </section>
 
   <div class="timer" id="timerbar" hidden>
-    <span>経過時間 <b id="elapsed">0:00</b></span>
+    <span>残り時間 <b id="remain">5:00</b></span>
     <span id="progress">回答済み 0 / 20</span>
   </div>
 
@@ -125,6 +145,7 @@
   <p class="center" id="submitwrap" hidden><button id="submit" type="button">採点する</button></p>
 
   <section class="card result" id="result" hidden>
+    <div class="timeup" id="timeup" hidden>時間切れ！</div>
     <div>結果</div>
     <div class="score" id="score"></div>
     <div>所要時間 <b id="time"></b></div>
@@ -138,15 +159,16 @@
 <script>
 (() => {
   const Q = window.QUIZ;
+  const LIMIT = 5 * 60 * 1000;   // 制限時間（ミリ秒）
   const TYPE = { single: "4択", multi: "一問多答", order: "並び替え" };
   const $ = (id) => document.getElementById(id);
   const form = $("quiz");
-  let startAt = 0, timerId = 0;
-  const orders = {};          // 並び替えの現在の並び（選択肢番号の配列）
+  let startAt = 0, timerId = 0, graded = false;
+  const orders = {};          // 並び替えの現在の並び（選択肢番号の配列）。初期の並びも回答として扱う
 
   const fmt = (ms) => {
-    const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, ss = s % 60;
-    return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(ss).padStart(2, "0");
+    const s = Math.floor(ms / 1000), m = Math.floor(s / 60), ss = s % 60;
+    return m + ":" + String(ss).padStart(2, "0");
   };
   const el = (tag, attrs = {}, text) => {
     const e = document.createElement(tag);
@@ -165,8 +187,10 @@
 
       if (q.type === "order") {
         orders[q.id] = q.choices.map((_, k) => k);
-        const ol = el("ol", { class: "order", id: "order-" + q.id });
-        card.append(ol, el("p", { class: "hint" }, "↑↓ボタンで並べ替えてください（一度も動かさない場合は未回答扱い）。"));
+        card.append(
+          el("ol", { class: "order", id: "order-" + q.id }),
+          el("p", { class: "hint" }, "行をドラッグ（スマホは左の ⠿ をつまむ）するか、▲▼ボタンで並べ替えてください。"),
+        );
       } else {
         const ul = el("ul", { class: "choices" });
         q.choices.forEach((c, k) => {
@@ -183,34 +207,79 @@
     form.addEventListener("change", updateProgress);
   }
 
-  const touched = new Set();
-  function drawOrder(q) {
+  // ---- 並び替え ----
+  function drawOrder(q, flashK) {
     const ol = $("order-" + q.id);
     ol.textContent = "";
-    const cur = orders[q.id];
+    const cur = orders[q.id], locked = !!form.dataset.locked;
     cur.forEach((k, pos) => {
-      const li = el("li");
-      const up = el("button", { type: "button", "aria-label": "上へ" }, "↑");
-      const down = el("button", { type: "button", "aria-label": "下へ" }, "↓");
-      up.disabled = pos === 0 || form.dataset.locked;
-      down.disabled = pos === cur.length - 1 || form.dataset.locked;
-      up.onclick = () => move(q, pos, -1);
-      down.onclick = () => move(q, pos, 1);
-      li.append(el("span", { class: "pos" }, pos + 1), el("span", { class: "label" }, q.choices[k]), up, down);
+      const li = el("li", { "data-k": k });
+      if (k === flashK) li.classList.add("flash");
+      const moves = el("span", { class: "moves" });
+      const up = el("button", { type: "button", "aria-label": "1つ上へ" }, "▲");
+      const down = el("button", { type: "button", "aria-label": "1つ下へ" }, "▼");
+      up.disabled = locked || pos === 0;
+      down.disabled = locked || pos === cur.length - 1;
+      up.onclick = () => swap(q, pos, pos - 1);
+      down.onclick = () => swap(q, pos, pos + 1);
+      moves.append(up, down);
+      li.append(el("span", { class: "grip", "aria-hidden": "true" }, "⠿"), el("span", { class: "pos" }, pos + 1),
+        el("span", { class: "label" }, q.choices[k]), moves);
+      li.addEventListener("pointerdown", (e) => startDrag(e, q, li));
       ol.append(li);
     });
+    if (flashK != null) setTimeout(() => ol.querySelector(".flash")?.classList.remove("flash"), 350);
   }
-  function move(q, pos, d) {
-    const a = orders[q.id];
-    [a[pos], a[pos + d]] = [a[pos + d], a[pos]];
-    touched.add(q.id);
-    drawOrder(q);
-    updateProgress();
+  function swap(q, a, b) {
+    const arr = orders[q.id], k = arr[a];
+    [arr[a], arr[b]] = [arr[b], arr[a]];
+    drawOrder(q, k);
+  }
+  function renumber(ol) {
+    [...ol.children].forEach((li, i) => (li.querySelector(".pos").textContent = i + 1));
+  }
+  function startDrag(e, q, li) {
+    if (form.dataset.locked || e.button > 0 || e.target.closest("button")) return;
+    // タッチではページのスクロールと区別するため、つまみ部分からのみドラッグ
+    if (e.pointerType !== "mouse" && !e.target.closest(".grip")) return;
+    e.preventDefault();
+    const ol = li.parentElement;
+    li.setPointerCapture(e.pointerId);
+    li.classList.add("dragging");
+    let startY = e.clientY;
+
+    const onMove = (ev) => {
+      // 掴んだ行は DOM 上で動かさず（ポインタキャプチャが外れるため）、隣の行を入れ替える
+      // 素早く動かした場合に備え、位置が落ち着くまで繰り返す
+      const mid = (r) => r.top + r.height / 2;
+      for (;;) {
+        li.style.transform = `translateY(${ev.clientY - startY}px)`;
+        const self = li.getBoundingClientRect();
+        const prev = li.previousElementSibling, next = li.nextElementSibling;
+        const before = li.offsetTop;
+        if (prev && mid(self) < mid(prev.getBoundingClientRect())) ol.insertBefore(prev, li.nextSibling);
+        else if (next && mid(self) > mid(next.getBoundingClientRect())) ol.insertBefore(next, li);
+        else break;
+        startY += li.offsetTop - before;
+      }
+      renumber(ol);
+    };
+    const onEnd = () => {
+      li.removeEventListener("pointermove", onMove);
+      li.removeEventListener("pointerup", onEnd);
+      li.removeEventListener("pointercancel", onEnd);
+      orders[q.id] = [...ol.children].map((x) => +x.dataset.k);
+      drawOrder(q);
+    };
+    li.addEventListener("pointermove", onMove);
+    li.addEventListener("pointerup", onEnd);
+    li.addEventListener("pointercancel", onEnd);
   }
 
+  // ---- 回答の収集と採点 ----
   function collect() {
     return Q.questions.map((q) => {
-      if (q.type === "order") return touched.has(q.id) ? orders[q.id].slice() : null;
+      if (q.type === "order") return orders[q.id].slice();
       const picked = [...form.querySelectorAll(`input[name="${q.id}"]:checked`)].map((x) => +x.value);
       if (!picked.length) return null;
       return q.type === "single" ? picked[0] : picked;
@@ -229,25 +298,44 @@
   }
   const b64url = (s) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 
+  function tick() {
+    const remain = LIMIT - (Date.now() - startAt);
+    $("remain").textContent = fmt(Math.max(0, remain) + 999);   // 秒は切り上げで表示（5:00 → 0:01 → 0:00）
+    $("timerbar").classList.toggle("low", remain <= 60 * 1000);
+    if (remain <= 0) grade(true);
+  }
+
   $("start").onclick = () => {
     $("intro").hidden = true;
     form.hidden = $("timerbar").hidden = $("submitwrap").hidden = false;
+    updateProgress();
     startAt = Date.now();
-    timerId = setInterval(() => ($("elapsed").textContent = fmt(Date.now() - startAt)), 250);
+    timerId = setInterval(tick, 200);
     window.addEventListener("beforeunload", warnLeave);
     window.scrollTo(0, 0);
   };
   const warnLeave = (e) => { e.preventDefault(); e.returnValue = ""; };
 
-  $("submit").onclick = async () => {
+  async function grade(timeUp) {
+    if (graded) return;
     const answers = collect();
-    const blank = answers.map((a, i) => (a === null ? i + 1 : 0)).filter(Boolean);
-    if (blank.length && !confirm(`未回答の問題があります（第${blank.join("・")}問）。\nこのまま採点しますか？`)) return;
-
-    const ms = Date.now() - startAt;
+    if (!timeUp) {
+      const blank = answers.map((a, i) => (a === null ? i + 1 : 0)).filter(Boolean);
+      if (blank.length && !confirm(`未回答の問題があります（第${blank.join("・")}問）。\nこのまま採点しますか？`)) return;
+      if (graded) return;
+      // 確認ダイアログ表示中はタイマーが止まるので、閉じた時点で時間切れなら時間切れ扱い
+      if (Date.now() - startAt >= LIMIT) timeUp = true;
+    }
+    graded = true;
+    const ms = Math.min(Date.now() - startAt, LIMIT);
     clearInterval(timerId);
     window.removeEventListener("beforeunload", warnLeave);
-    $("elapsed").textContent = fmt(ms);
+    $("remain").textContent = fmt(LIMIT - ms + 999);
+
+    form.dataset.locked = "1";
+    form.querySelectorAll("input").forEach((x) => (x.disabled = true));
+    Q.questions.filter((q) => q.type === "order").forEach((q) => drawOrder(q));
+    $("submitwrap").hidden = true;
 
     let score = 0;
     for (const [i, q] of Q.questions.entries()) {
@@ -255,17 +343,14 @@
       if (a !== null && (await sha256(`${Q.salt}:${q.id}:${keyString(q, a)}`)) === q.h) score++;
     }
 
-    form.dataset.locked = "1";
-    form.querySelectorAll("input").forEach((x) => (x.disabled = true));
-    Q.questions.filter((q) => q.type === "order").forEach(drawOrder);
-    $("submitwrap").hidden = true;
-
+    $("timeup").hidden = !timeUp;
     $("score").textContent = `${score} / ${Q.questions.length} 問正解`;
     $("time").textContent = fmt(ms);
     $("golink").href = "answer.html#r=" + b64url(JSON.stringify({ a: answers, t: ms }));
     $("result").hidden = false;
     $("result").scrollIntoView({ behavior: "smooth", block: "center" });
-  };
+  }
+  $("submit").onclick = () => grade(false);
 
   if (!Q || !window.crypto || !crypto.subtle) {
     $("start").textContent = "このブラウザでは動作しません";
