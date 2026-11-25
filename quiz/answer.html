@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旭川クイズ 解説</title>
+<meta name="description" content="旭川クイズ20問の解説ページ。回答の正誤、正解、解説、出典を表示します。">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --page: #edf6f3; --paper: #ffffff; --text: #1b2a28; --muted: #566b67;
+    --title: #0f4f45; --accent: #1a7064; --accent-ink: #ffffff; --soft: #e1f3ee; --soft-2: #f2faf7; --line: #c2ddd5;
+    --ok: #1d7a3e; --ok-bg: #e3f5e8; --ng: #b3261e; --ng-bg: #fbe6e4; --link: #1a7064;
+    --warn: #a14a06; --warn-bg: #fff3e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4;
+      --title: #8fe0cf; --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622; --line: #2a4a43;
+      --ok: #7fdc9a; --ok-bg: #163322; --ng: #ff9b92; --ng-bg: #3a1a18; --link: #7fd8c7;
+      --warn: #f2b26b; --warn-bg: #3a2814;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4;
+    --title: #8fe0cf; --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622; --line: #2a4a43;
+    --ok: #7fdc9a; --ok-bg: #163322; --ng: #ff9b92; --ng-bg: #3a1a18; --link: #7fd8c7;
+    --warn: #f2b26b; --warn-bg: #3a2814;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    line-height: 1.7;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.6rem; margin: 8px 0 20px; text-align: center; color: var(--title); }
+  a { color: var(--link); }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
+  .summary { text-align: center; border-color: var(--accent); }
+  .summary .score { font-size: 2.2rem; font-weight: bold; color: var(--accent); margin: 4px 0; }
+  /* 結果のまとめ：4行5列 */
+  .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; max-width: 360px; margin: 12px auto 0; padding: 0; list-style: none; }
+  .grid a {
+    display: block; padding: 4px 2px; border-radius: 6px; text-decoration: none;
+    font-variant-numeric: tabular-nums; font-size: .9rem;
+  }
+  .grid a.ok { background: var(--ok-bg); color: var(--ok); }
+  .grid a.ng { background: var(--ng-bg); color: var(--ng); }
+
+  .qhead { display: flex; gap: 10px; align-items: center; margin-bottom: 4px; flex-wrap: wrap; }
+  .qnum { font-weight: bold; color: var(--accent); }
+  .qtype { font-size: .75rem; border: 1px solid var(--line); border-radius: 99px; padding: 0 8px; color: var(--muted); }
+  .mark { margin-left: auto; font-weight: bold; border-radius: 99px; padding: 0 12px; }
+  .mark.ok { background: var(--ok-bg); color: var(--ok); }
+  .mark.ng { background: var(--ng-bg); color: var(--ng); }
+  .qtext { margin: 0 0 10px; font-weight: bold; }
+  .choices { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 4px; }
+  .choices li { display: flex; gap: 8px; align-items: baseline; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--soft-2); }
+  .choices li.correct { border-color: var(--ok); background: var(--ok-bg); }
+  .choices li.wrongpick { border-color: var(--ng); background: var(--ng-bg); }
+  .choices .tag { margin-left: auto; font-size: .78rem; white-space: nowrap; color: var(--muted); }
+  .choices .sym { width: 1.2em; flex: none; font-weight: bold; }
+  .orders { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 12px; }
+  .orders h3 { font-size: .85rem; margin: 0 0 4px; color: var(--muted); }
+  .orders ol { margin: 0; padding-left: 1.5em; }
+  .orders li.bad { color: var(--ng); }
+  .explain { background: var(--soft); border-radius: 8px; padding: 10px 14px; margin: 0 0 8px; }
+  .refs { font-size: .88rem; margin: 0; padding-left: 1.3em; color: var(--muted); }
+  .refs-title { font-size: .85rem; font-weight: bold; color: var(--muted); margin: 6px 0 2px; }
+  .warn { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 10px 14px; }
+  .center { text-align: center; }
+  .btn { display: inline-block; padding: 10px 22px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: bold; }
+  @media (max-width: 480px) { .card { padding: 14px; } .orders { grid-template-columns: 1fr; } h1 { font-size: 1.35rem; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>旭川クイズ 解説</h1>
+  <div id="out"><p>読み込み中…</p></div>
+  <p class="center"><a class="btn" href="./">クイズに挑戦する</a></p>
+</main>
+
+<script src="data.js"></script>
+<script>
+(async () => {
+  const PASSPHRASE = "9th-city-site";
+  const LIMIT = 4 * 60 * 1000;   // 制限時間（quiz/index.html と揃える）
+  const TYPE = { single: "4択", multi: "一問多答", order: "並び替え" };
+  const Q = window.QUIZ;
+  const out = document.getElementById("out");
+
+  const el = (tag, attrs = {}, text) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const fmt = (ms) => {
+    const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, ss = s % 60;
+    return (h ? h + "時間" : "") + (h || m ? m + "分" : "") + ss + "秒";
+  };
+  const warn = (msg) => { out.textContent = ""; out.append(el("p", { class: "warn" }, msg)); };
+
+  // 回答の読み取り（URLの #r=...）
+  const m = location.hash.match(/r=([A-Za-z0-9_-]+)/);
+  if (!m) return warn("回答データがありません。クイズのページで「採点する」を押してから、表示されるリンクで開いてください。");
+  let data;
+  try {
+    const bin = atob(m[1].replace(/-/g, "+").replace(/_/g, "/"));
+    data = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))));
+    if (!Array.isArray(data.a) || data.a.length !== Q.questions.length) throw 0;
+  } catch { return warn("回答データを読み取れませんでした。URLが途中で切れていないか確認してください。"); }
+
+  // 解説の復号
+  let secret;
+  try {
+    const enc = new TextEncoder();
+    const b = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const key = await crypto.subtle.importKey("raw", await crypto.subtle.digest("SHA-256", enc.encode(PASSPHRASE)), "AES-GCM", false, ["decrypt"]);
+    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b(Q.secret.iv) }, key, b(Q.secret.ct));
+    secret = JSON.parse(new TextDecoder().decode(plain));
+  } catch { return warn("解説データを読み込めませんでした。"); }
+
+  const same = (q, a, ans) => {
+    if (a === null || a === undefined) return false;
+    if (q.type === "single") return a === ans;
+    if (q.type === "multi") return [...a].sort((x, y) => x - y).join(",") === [...ans].sort((x, y) => x - y).join(",");
+    return a.join(",") === ans.join(",");
+  };
+
+  const results = Q.questions.map((q, i) => same(q, data.a[i], secret[i].answer));
+  const score = results.filter(Boolean).length;
+  out.textContent = "";
+
+  // まとめ
+  const sum = el("section", { class: "card summary" });
+  sum.append(el("div", {}, "結果"), el("div", { class: "score" }, `${score} / ${Q.questions.length} 問正解`));
+  if (typeof data.t === "number") sum.append(el("div", {}, "所要時間 " + fmt(data.t) + (data.t >= LIMIT ? "（時間切れ）" : "")));
+  const grid = el("ul", { class: "grid" });
+  results.forEach((ok, i) => {
+    const li = el("li"), a = el("a", { href: "#" + Q.questions[i].id, class: ok ? "ok" : "ng" }, `${i + 1} ${ok ? "○" : "×"}`);
+    // URLの #r=... を消さないよう、ハッシュは書き換えずにスクロールする
+    a.onclick = (e) => { e.preventDefault(); document.getElementById(Q.questions[i].id).scrollIntoView({ behavior: "smooth" }); };
+    li.append(a); grid.append(li);
+  });
+  sum.append(grid);
+  out.append(sum);
+
+  // 各問
+  Q.questions.forEach((q, i) => {
+    const a = data.a[i], s = secret[i], ok = results[i];
+    const card = el("section", { class: "card", id: q.id });
+    const head = el("div", { class: "qhead" });
+    head.append(
+      el("span", { class: "qnum" }, `第${i + 1}問`),
+      el("span", { class: "qtype" }, TYPE[q.type]),
+      el("span", { class: "mark " + (ok ? "ok" : "ng") }, a === null ? "× 未回答" : ok ? "○ 正解" : "× 不正解"),
+    );
+    card.append(head, el("p", { class: "qtext" }, q.q));
+
+    if (q.type === "order") {
+      const box = el("div", { class: "orders" });
+      const col = (title, seq, mark) => {
+        const d = el("div"), ol = el("ol");
+        d.append(el("h3", {}, title));
+        if (!seq) ol.append(el("li", {}, "（未回答）"));
+        else seq.forEach((k, pos) => ol.append(el("li", mark && k !== s.answer[pos] ? { class: "bad" } : {}, q.choices[k])));
+        d.append(ol);
+        return d;
+      };
+      box.append(col("あなたの回答", a, true), col("正解", s.answer, false));
+      card.append(box);
+    } else {
+      const corr = new Set([].concat(s.answer));
+      const picked = new Set(a === null ? [] : [].concat(a));
+      const ul = el("ul", { class: "choices" });
+      q.choices.forEach((c, k) => {
+        const isC = corr.has(k), isP = picked.has(k);
+        const li = el("li", { class: isC ? "correct" : isP ? "wrongpick" : "" });
+        li.append(el("span", { class: "sym" }, isC ? "○" : isP ? "×" : ""), el("span", {}, c));
+        if (isP) li.append(el("span", { class: "tag" }, "あなたの回答"));
+        ul.append(li);
+      });
+      card.append(ul);
+    }
+
+    card.append(el("p", { class: "explain" }, s.explain));
+    if (s.refs && s.refs.length) {
+      card.append(el("p", { class: "refs-title" }, "出典"));
+      const ul = el("ul", { class: "refs" });
+      s.refs.forEach((r) => {
+        const li = el("li"), link = el("a", { href: r.u, target: "_blank", rel: "noopener" }, r.t);
+        li.append(link); ul.append(li);
+      });
+      card.append(ul);
+    }
+    out.append(card);
+  });
+
+})();
+</script>
+</body>
+</html>

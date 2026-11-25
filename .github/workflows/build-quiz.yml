@@ -1,0 +1,70 @@
+# 旭川クイズの quiz/data.js を元データ（quiz-src/）から作り直し、差分があれば commit する。
+# - main への push（GitHub 上での直接編集を含む）: 再生成して main に commit
+# - 同じリポジトリ内のブランチからの PR: 再生成して PR のブランチに commit
+# - フォークからの PR: push できないため、data.js が元データと一致しなければ失敗させる
+# GITHUB_TOKEN による push は新たなワークフローを起動しないので、ループはしない。
+name: Build quiz data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "quiz-src/**"
+      - "quiz/data.js"
+      - ".github/workflows/build-quiz.yml"
+  pull_request:
+    paths:
+      - "quiz-src/**"
+      - "quiz/data.js"
+      - ".github/workflows/build-quiz.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-quiz-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # PR のときはマージ用の一時コミットではなく、PR のブランチそのものを取得する
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Rebuild quiz/data.js
+        run: node quiz-src/build.mjs
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet -- quiz/data.js; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "quiz/data.js は元データと一致しています。"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- quiz/data.js
+          fi
+
+      - name: Fail on fork PR with stale data
+        if: steps.diff.outputs.changed == 'true' && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "::error::quiz/data.js が quiz-src/ と一致しません。node quiz-src/build.mjs を実行して commit してください。"
+          exit 1
+
+      - name: Commit regenerated data
+        if: steps.diff.outputs.changed == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quiz/data.js
+          git commit -m "Rebuild quiz/data.js from quiz-src"
+          git push
