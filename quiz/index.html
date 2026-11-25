@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>旭川クイズ 20問</title>
-<meta name="description" content="旭川の地理・歴史・グルメ・文化に関するクイズ20問（制限時間5分）。4択、一問多答、並び替えの問題に答えて、採点後に解説ページで正誤と出典を確認できます。">
+<meta name="description" content="旭川の地理・歴史・グルメ・文化に関するクイズ20問（制限時間3分）。4択、一問多答、並び替えの問題に答えて、採点後に解説ページで正誤と出典を確認できます。">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>
   :root {
@@ -128,7 +128,7 @@
       <li>地理・歴史・グルメ・文化など、旭川に関する問題です。</li>
       <li>全20問。4択、一問多答（当てはまるものをすべて選ぶ）、並び替えがあります。</li>
       <li>一問多答と並び替えは、完全に合っている場合のみ正解です。</li>
-      <li>制限時間は5分です。「回答を始める」を押すと問題が表示され、カウントダウンが始まります。時間切れになると、その時点の回答で自動的に採点します。</li>
+      <li>制限時間は3分です。「回答を始める」を押すと問題が表示され、カウントダウンが始まります。時間切れになると、その時点の回答で自動的に採点します。</li>
       <li>採点後は正解数と所要時間のみ表示されます。各問の正誤と解説は、解説ページで確認できます。</li>
     </ul>
     <p class="center" style="margin:16px 0 0"><button id="start" disabled>読み込み中…</button></p>
@@ -136,7 +136,7 @@
   </section>
 
   <div class="timer" id="timerbar" hidden>
-    <span>残り時間 <b id="remain">5:00</b></span>
+    <span>残り時間 <b id="remain">3:00</b></span>
     <span id="progress">回答済み 0 / 20</span>
   </div>
 
@@ -159,7 +159,7 @@
 <script>
 (() => {
   const Q = window.QUIZ;
-  const LIMIT = 5 * 60 * 1000;   // 制限時間（ミリ秒）
+  const LIMIT = 3 * 60 * 1000;   // 制限時間（ミリ秒）
   const TYPE = { single: "4択", multi: "一問多答", order: "並び替え" };
   const $ = (id) => document.getElementById(id);
   const form = $("quiz");
@@ -300,7 +300,7 @@
 
   function tick() {
     const remain = LIMIT - (Date.now() - startAt);
-    $("remain").textContent = fmt(Math.max(0, remain) + 999);   // 秒は切り上げで表示（5:00 → 0:01 → 0:00）
+    $("remain").textContent = fmt(Math.max(0, remain) + 999);   // 秒は切り上げで表示（3:00 → 0:01 → 0:00）
     $("timerbar").classList.toggle("low", remain <= 60 * 1000);
     if (remain <= 0) grade(true);
   }

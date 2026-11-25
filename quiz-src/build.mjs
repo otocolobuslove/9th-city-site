@@ -19,6 +19,17 @@ const keyString = (q, ans) =>
 
 const sha256 = async (s) => hex(await crypto.subtle.digest("SHA-256", enc.encode(s)));
 
+// 出題順のチェック：難易度（易→中→難）、同じ難易度では形式（4択→一問多答→並び替え）の順
+const LEVELS = ["易", "中", "難"], TYPES = ["single", "multi", "order"];
+let prevRank = -1;
+for (const [i, q] of questions.entries()) {
+  const lv = LEVELS.indexOf(q.level), ty = TYPES.indexOf(q.type);
+  if (lv < 0 || ty < 0) throw new Error(`q${i + 1}: level か type が不正（${q.level} / ${q.type}）`);
+  const rank = lv * 10 + ty;
+  if (rank < prevRank) throw new Error(`q${i + 1}: 出題順が「難易度 → 形式」の順になっていない`);
+  prevRank = rank;
+}
+
 const pub = [];
 const secret = [];
 for (const [i, q] of questions.entries()) {
