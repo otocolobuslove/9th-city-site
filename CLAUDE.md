@@ -23,7 +23,7 @@
 `index.html` / `request.html` / `marshmallow.html` は、検索結果に正しい日付が出るよう、同じ日付を次の 3 か所に書いている。内容を更新したら、すべて揃えて更新する（日付は日本時間）。
 
 1. タイトル下の `<p class="page-dates">` … 「最終更新日」（`<time datetime>` と表示の両方）
-2. `<head>` の構造化データ（`application/ld+json` の `Article`）の `dateModified`
+2. `<head>` の構造化データ（`application/ld+json` の `WebPage`）の `dateModified`
 3. `sitemap.xml` の `lastmod`
 
 「公開日」と `datePublished` はページを最初に公開した日なので変えない。見た目だけの修正や誤字の修正では日付を進めない（中身が変わっていないのに日付だけ新しくすると、Google に不自然な更新とみなされうる）。
