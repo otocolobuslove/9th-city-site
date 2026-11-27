@@ -10,13 +10,23 @@
 | `index.html` | メインページ（プロフィール・活動歴など） |
 | `request.html` | GitHub Discussions での要望の出し方ガイド |
 | `marshmallow.html` | マシュマロ対応表 |
-| `sitemap.xml` | ページを変更したら `lastmod` を更新する |
+| `sitemap.xml` | ページを変更したら `lastmod` を更新する（下記「ページの日付」） |
 | `quiz/` | 旭川クイズ（公開されるページ）。他ページからはリンクしない独立ページ |
 | `quiz-src/` | 旭川クイズの元データと生成スクリプト |
 | `.github/workflows/build-quiz.yml` | クイズのデータを自動で再生成する CI |
 
 `main` ブランチの内容がそのまま GitHub Pages で公開される。
 `main` には GitHub 上での直接編集や CI の自動コミットも入るので、作業前と push 前に `git pull` すること。
+
+## ページの日付
+
+`index.html` / `request.html` / `marshmallow.html` は、検索結果に正しい日付が出るよう、同じ日付を次の 3 か所に書いている。内容を更新したら、すべて揃えて更新する（日付は日本時間）。
+
+1. タイトル下の `<p class="page-dates">` … 「最終更新日」（`<time datetime>` と表示の両方）
+2. `<head>` の構造化データ（`application/ld+json` の `Article`）の `dateModified`
+3. `sitemap.xml` の `lastmod`
+
+「公開日」と `datePublished` はページを最初に公開した日なので変えない。見た目だけの修正や誤字の修正では日付を進めない（中身が変わっていないのに日付だけ新しくすると、Google に不自然な更新とみなされうる）。
 
 ## 旭川クイズ
 
