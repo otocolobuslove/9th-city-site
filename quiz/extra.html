@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旭川難問クイズ</title>
+<meta name="description" content="旭川クイズで全問正解した人だけが挑戦できる、旭川難問クイズ。">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --page: #edf6f3;
+    --paper: #ffffff;
+    --text: #1b2a28;
+    --muted: #566b67;
+    --title: #0f4f45;
+    --accent: #1a7064;
+    --accent-ink: #ffffff;
+    --soft: #e1f3ee;
+    --soft-2: #f2faf7;
+    --line: #c2ddd5;
+    --warn: #a14a06;
+    --warn-bg: #fff3e2;
+    --danger: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4; --title: #8fe0cf;
+      --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622;
+      --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814; --danger: #ff9b92;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0b1614; --paper: #12201d; --text: #dcebe7; --muted: #93aaa4; --title: #8fe0cf;
+    --accent: #7fd8c7; --accent-ink: #0b1614; --soft: #17302b; --soft-2: #132622;
+    --line: #2a4a43; --warn: #f2b26b; --warn-bg: #3a2814; --danger: #ff9b92;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--text);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    line-height: 1.7;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.6rem; margin: 8px 0 20px; text-align: center; color: var(--title); }
+  .card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 20px; margin: 0 0 16px;
+  }
+  fieldset.card { min-width: 0; }
+  .lead-in { margin: 0 0 12px; font-weight: bold; color: var(--title); text-align: center; word-break: keep-all; overflow-wrap: anywhere; }
+  .rules { margin: 0; padding-left: 1.3em; }
+  .rules li { margin: 2px 0; }
+  button {
+    font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--accent);
+    background: var(--accent); color: var(--accent-ink); padding: 10px 22px; font-weight: bold;
+  }
+  button.ghost { background: transparent; color: var(--accent); }
+  button:disabled { opacity: .45; cursor: default; }
+  .center { text-align: center; }
+
+  .timer {
+    position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center;
+    background: var(--soft); border: 1px solid var(--line); border-radius: 0 0 10px 10px;
+    padding: 6px 16px; margin: 0 0 16px; font-variant-numeric: tabular-nums;
+  }
+  .timer b { font-size: 1.15rem; }
+  .timer.low b { color: var(--danger); }
+
+  .qhead { display: flex; gap: 10px; align-items: baseline; margin-bottom: 4px; }
+  .qnum { font-weight: bold; color: var(--accent); white-space: nowrap; }
+  .qtype {
+    font-size: .75rem; border: 1px solid var(--line); border-radius: 99px; padding: 0 8px;
+    color: var(--muted); white-space: nowrap;
+  }
+  .qtext { margin: 0 0 10px; font-weight: bold; }
+  .choices { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .choices label {
+    display: flex; gap: 10px; align-items: center; padding: 8px 12px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--soft-2); cursor: pointer;
+  }
+  .choices label:has(input:checked) { border-color: var(--accent); background: var(--soft); }
+  .choices input { accent-color: var(--accent); width: 18px; height: 18px; flex: none; }
+
+  /* 並び替え：行をドラッグ（スマホは左のつまみ）か、右の ▲▼ で入れ替える */
+  .order { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .order li {
+    display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 4px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--paper); cursor: grab; user-select: none;
+    -webkit-user-select: none; position: relative; transition: box-shadow .15s, border-color .15s;
+  }
+  .order li.dragging {
+    z-index: 2; cursor: grabbing; border-color: var(--accent); background: var(--soft);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .18); transition: none;
+  }
+  .order li.flash { border-color: var(--accent); background: var(--soft); }
+  .order .grip {
+    flex: none; width: 34px; align-self: stretch; display: grid; place-items: center;
+    color: var(--muted); font-size: 1.1rem; touch-action: none; border-radius: 6px;
+  }
+  .order .grip:hover { background: var(--soft); }
+  .order .pos {
+    flex: none; width: 1.7em; height: 1.7em; display: grid; place-items: center; border-radius: 50%;
+    background: var(--accent); color: var(--accent-ink); font-weight: bold; font-size: .85rem;
+  }
+  .order .label { flex: 1; padding: 6px 0; }
+  .order .moves { display: flex; gap: 4px; flex: none; }
+  .order .moves button { padding: 0; width: 36px; height: 34px; font-size: .8rem; font-weight: normal; }
+  form[data-locked] .order li { cursor: default; }
+  .hint { font-size: .85rem; color: var(--muted); margin: 6px 0 0; }
+
+  /* 1問ずつ表示：前へ／次へ と問題一覧 */
+  .pager { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 0 0 14px; }
+  .pager button { padding: 10px 16px; min-width: 7.5em; }
+  .pager .count { font-weight: bold; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .qnav-title { font-size: .8rem; color: var(--muted); margin: 0 0 4px; }
+  .qnav { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+  .qnav button {
+    width: 100%; padding: 4px 0; font-size: .8rem; font-weight: normal; border-radius: 6px;
+    background: var(--paper); color: var(--muted); border: 1px solid var(--line); font-variant-numeric: tabular-nums;
+  }
+  .qnav button.done { background: var(--soft); color: var(--accent); border-color: var(--accent); }
+  .qnav button.current { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: bold; }
+  fieldset.card.enter { animation: q-in-next .22s ease-out; }
+  fieldset.card.back { animation: q-in-prev .22s ease-out; }
+  @keyframes q-in-next { from { opacity: 0; transform: translateX(24px); } }
+  @keyframes q-in-prev { from { opacity: 0; transform: translateX(-24px); } }
+  @media (prefers-reduced-motion: reduce) { fieldset.card.enter, fieldset.card.back { animation: none; } }
+
+  .result { text-align: center; border-color: var(--accent); }
+  .result .score { font-size: 2.2rem; font-weight: bold; color: var(--accent); margin: 4px 0; }
+  .result .timeup { color: var(--danger); font-weight: bold; }
+  .result a.go {
+    display: inline-block; margin-top: 10px; padding: 10px 22px; border-radius: 8px;
+    background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: bold;
+  }
+  .warn { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 8px 12px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 480px) { .card { padding: 14px; } h1 { font-size: 1.35rem; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>目指せ旭川観光大使<br>旭川難問クイズ</h1>
+
+  <section class="card" id="intro">
+    <p class="lead-in">先ほど出題した問題では<wbr>物足りない<wbr>そこのアナタへ<br>追加でさらに<wbr>難易度の高い問題を<wbr>用意しました。</p>
+    <ul class="rules">
+      <li>出題ジャンルや形式は先ほどと同じです。</li>
+      <li>制限時間は<span class="js-limit">1分</span>、全<span class="js-count">6</span>問です。</li>
+      <li>「回答を始める」を押すとカウントダウンが始まります。時間切れになると、その時点の回答で自動的に採点します。</li>
+      <li>採点後は正解数と所要時間のみ表示されます。各問の正誤と解説は、解説ページで確認できます。</li>
+    </ul>
+    <p class="center" style="margin:16px 0 0"><button id="start" disabled>読み込み中…</button></p>
+    <noscript><p class="warn">このクイズは JavaScript を使います。</p></noscript>
+  </section>
+
+  <div class="timer" id="timerbar" hidden>
+    <span>残り時間 <b id="remain">4:00</b></span>
+    <span id="progress">回答済み 0 / 20</span>
+  </div>
+
+  <form id="quiz" hidden></form>
+
+  <div id="stage-nav" hidden>
+    <div class="pager">
+      <button type="button" class="ghost" id="prev">← 前の問題</button>
+      <span class="count" id="count">1 / 20</span>
+      <button type="button" id="next">次の問題 →</button>
+    </div>
+    <p class="qnav-title">問題一覧（押すとその問題へ移動）</p>
+    <ul class="qnav" id="qnav"></ul>
+  </div>
+
+  <section class="card result" id="result" hidden>
+    <div class="timeup" id="timeup" hidden>時間切れ！</div>
+    <div>結果</div>
+    <div class="score" id="score"></div>
+    <div>所要時間 <b id="time"></b></div>
+    <a class="go" id="golink" href="answer.html">解説ページへ →</a>
+    <p class="hint">解説ページのURLにはあなたの回答が含まれています。ブックマークや共有で結果を残せます。</p>
+    <p style="margin:12px 0 0"><button class="ghost" type="button" onclick="location.reload()">もう一度挑戦する</button></p>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script src="quiz.js"></script>
+<script>
+(async () => {
+  const start = document.getElementById("start");
+  if (!window.QUIZ_EXTRA || !window.crypto || !crypto.subtle) { start.textContent = "このブラウザでは動作しません"; return; }
+  // 本編の回答（URL の #m=...）から問題を復号する。全問正解の回答でなければ復号できない
+  let mainAnswers, X;
+  try {
+    mainAnswers = QuizCommon.decodeParam(QuizCommon.readHash("m"));
+    X = await QuizCommon.unlockExtra(mainAnswers);
+  } catch {
+    start.hidden = true;
+    const p = document.createElement("p");
+    p.className = "warn";
+    p.innerHTML = 'この難問クイズは、<a href="./">旭川クイズ</a>で全問正解した人だけが挑戦できます。全問正解すると、解説ページの最後に挑戦用のリンクが表示されます。';
+    start.parentElement.after(p);
+    return;
+  }
+  runQuiz({ ...X, salt: QUIZ_EXTRA.salt, limitSec: QUIZ_EXTRA.limitSec }, { s: "x", m: mainAnswers });
+})();
+</script>
+</body>
+</html>
