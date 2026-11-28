@@ -71,24 +71,30 @@
   .refs-title { font-size: .85rem; font-weight: bold; color: var(--muted); margin: 6px 0 2px; }
   .warn { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 10px 14px; }
   .center { text-align: center; }
+  .bonus { border: 2px solid var(--accent); background: var(--soft); text-align: center; }
+  .bonus h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--title); line-height: 1.5; }
+  .bonus .lead-in { margin: 0 0 10px; font-weight: bold; word-break: keep-all; overflow-wrap: anywhere; }
+  .bonus ul { display: inline-block; text-align: left; margin: 0 0 14px; padding-left: 1.3em; }
+  .perfect { margin: 10px 0 0; font-weight: bold; color: var(--ok); }
+  .perfect a { color: inherit; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
   .btn { display: inline-block; padding: 10px 22px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: bold; }
   @media (max-width: 480px) { .card { padding: 14px; } .orders { grid-template-columns: 1fr; } h1 { font-size: 1.35rem; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>旭川クイズ 解説</h1>
+  <h1 id="title">旭川クイズ 解説</h1>
   <div id="out"><p>読み込み中…</p></div>
-  <p class="center"><a class="btn" href="./">クイズに挑戦する</a></p>
+  <p class="links" id="links"></p>
 </main>
 
 <script src="data.js"></script>
+<script src="common.js"></script>
 <script>
 (async () => {
-  const PASSPHRASE = "9th-city-site";
-  const LIMIT = 4 * 60 * 1000;   // 制限時間（quiz/index.html と揃える）
   const TYPE = { single: "4択", multi: "一問多答", order: "並び替え" };
-  const Q = window.QUIZ;
   const out = document.getElementById("out");
 
   const el = (tag, attrs = {}, text) => {
@@ -103,33 +109,38 @@
   };
   const warn = (msg) => { out.textContent = ""; out.append(el("p", { class: "warn" }, msg)); };
 
-  // 回答の読み取り（URLの #r=...）
-  const m = location.hash.match(/r=([A-Za-z0-9_-]+)/);
-  if (!m) return warn("回答データがありません。クイズのページで「採点する」を押してから、表示されるリンクで開いてください。");
+  const setLinks = (list) => {
+    const box = document.getElementById("links");
+    box.textContent = "";
+    list.forEach(([text, href, ghost]) => box.append(el("a", { class: "btn" + (ghost ? " ghost" : ""), href }, text)));
+  };
+  setLinks([["クイズに挑戦する", "./"]]);
+
+  // 回答の読み取り（URLの #r=...）。難問クイズの結果には s: "x" と本編の回答 m が入っている
+  const r = QuizCommon.readHash("r");
+  if (!r) return warn("回答データがありません。クイズのページで「採点する」を押してから、表示されるリンクで開いてください。");
   let data;
-  try {
-    const bin = atob(m[1].replace(/-/g, "+").replace(/_/g, "/"));
-    data = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))));
-    if (!Array.isArray(data.a) || data.a.length !== Q.questions.length) throw 0;
-  } catch { return warn("回答データを読み取れませんでした。URLが途中で切れていないか確認してください。"); }
+  try { data = QuizCommon.decodeParam(r); } catch { return warn("回答データを読み取れませんでした。URLが途中で切れていないか確認してください。"); }
+
+  const isExtra = data.s === "x";
+  let Q;
+  if (isExtra) {
+    try { Q = { ...(await QuizCommon.unlockExtra(data.m)), limitSec: QUIZ_EXTRA.limitSec }; }
+    catch { return warn("難問クイズの解説データを読み込めませんでした。URLが途中で切れていないか確認してください。"); }
+    document.title = "旭川難問クイズ 解説";
+    document.getElementById("title").textContent = "旭川難問クイズ 解説";
+    setLinks([["難問クイズにもう一度挑戦する", "extra.html#m=" + QuizCommon.encodeParam(data.m)], ["旭川クイズに戻る", "./", true]]);
+  } else {
+    Q = window.QUIZ;
+  }
+  if (!Array.isArray(data.a) || data.a.length !== Q.questions.length) return warn("回答データを読み取れませんでした。URLが途中で切れていないか確認してください。");
+  const LIMIT = Q.limitSec * 1000;
 
   // 解説の復号
   let secret;
-  try {
-    const enc = new TextEncoder();
-    const b = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
-    const key = await crypto.subtle.importKey("raw", await crypto.subtle.digest("SHA-256", enc.encode(PASSPHRASE)), "AES-GCM", false, ["decrypt"]);
-    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b(Q.secret.iv) }, key, b(Q.secret.ct));
-    secret = JSON.parse(new TextDecoder().decode(plain));
-  } catch { return warn("解説データを読み込めませんでした。"); }
+  try { secret = await QuizCommon.decryptSecret(Q.secret); } catch { return warn("解説データを読み込めませんでした。"); }
 
-  const same = (q, a, ans) => {
-    if (a === null || a === undefined) return false;
-    if (q.type === "single") return a === ans;
-    if (q.type === "multi") return [...a].sort((x, y) => x - y).join(",") === [...ans].sort((x, y) => x - y).join(",");
-    return a.join(",") === ans.join(",");
-  };
-
+  const same = (q, a, ans) => a !== null && a !== undefined && QuizCommon.keyString(q, a) === QuizCommon.keyString(q, ans);
   const results = Q.questions.map((q, i) => same(q, data.a[i], secret[i].answer));
   const score = results.filter(Boolean).length;
   out.textContent = "";
@@ -139,6 +150,10 @@
   sum.append(el("div", {}, "結果"), el("div", { class: "score" }, `${score} / ${Q.questions.length} 問正解`));
   if (typeof data.t === "number") sum.append(el("div", {}, "所要時間 " + fmt(data.t) + (data.t >= LIMIT ? "（時間切れ）" : "")));
   const grid = el("ul", { class: "grid" });
+  // 20問は4行5列、6問は2行3列
+  const cols = Q.questions.length % 5 === 0 ? 5 : Q.questions.length % 3 === 0 ? 3 : 5;
+  grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+  if (cols === 3) grid.style.maxWidth = "220px";
   results.forEach((ok, i) => {
     const li = el("li"), a = el("a", { href: "#" + Q.questions[i].id, class: ok ? "ok" : "ng" }, `${i + 1} ${ok ? "○" : "×"}`);
     // URLの #r=... を消さないよう、ハッシュは書き換えずにスクロールする
@@ -199,6 +214,30 @@
     out.append(card);
   });
 
+  // 本編で全問正解した人にだけ、難問クイズへの案内を出す（本編の回答から難問クイズの鍵を作れるか確認）
+  if (!isExtra && score === Q.questions.length) {
+    try {
+      await QuizCommon.unlockExtra(data.a);
+      const href = "extra.html#m=" + QuizCommon.encodeParam(data.a);
+      const sec = el("section", { class: "card bonus", id: "bonus" });
+      const h2 = el("h2");
+      h2.append("目指せ旭川観光大使", el("br"), "旭川難問クイズ");
+      const lead = el("p", { class: "lead-in" });
+      lead.append("先ほど出題した問題では", el("wbr"), "物足りない", el("wbr"), "そこのアナタへ", el("br"), "追加でさらに", el("wbr"), "難易度の高い問題を", el("wbr"), "用意しました。");
+      const ul = el("ul");
+      ul.append(el("li", {}, "出題ジャンルや形式は先ほどと同じです。"),
+        el("li", {}, `制限時間は${QUIZ_EXTRA.limitSec % 60 ? QUIZ_EXTRA.limitSec + "秒" : QUIZ_EXTRA.limitSec / 60 + "分"}、全${QUIZ_EXTRA.count}問です。`));
+      const go = el("p");
+      go.append(el("a", { class: "btn", href }, "難問クイズに挑戦する →"));
+      sec.append(h2, lead, ul, go);
+      out.append(sec);
+      const note = el("p", { class: "perfect" });
+      const jump = el("a", { href: "#bonus" }, "解説の最後に、全問正解者だけの難問クイズがあります ↓");
+      jump.onclick = (e) => { e.preventDefault(); sec.scrollIntoView({ behavior: "smooth" }); };
+      note.append("全問正解！ ", jump);
+      sum.append(note);
+    } catch { /* 鍵が作れない（データの不整合）ときは案内を出さない */ }
+  }
 })();
 </script>
 </body>
